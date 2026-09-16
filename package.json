@@ -1,0 +1,15 @@
+{
+  "name": "@vinay/learning-hub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-pages.mjs && node scripts/verify-pages.mjs",
+    "dev": "node server.mjs",
+    "preview:pages": "node scripts/preview-pages.mjs",
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

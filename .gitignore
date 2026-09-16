@@ -1,0 +1,8 @@
+.DS_Store
+dist/
+node_modules/
+
+# Local source references and printable worksheet archive are not required by
+# the interactive GitHub Pages site.
+english/
+worksheets/

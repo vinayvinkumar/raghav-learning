@@ -1,0 +1,2404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6fa">
+  <title>Raghav Learning</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📚%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./english-module.css?v=20260915-1">
+  <style>
+    :root {
+      --ink: #17324d;
+      --paper: #fffdf4;
+      --sun: #f5c84b;
+      --coral: #ed5b4f;
+      --teal: #128b82;
+      --blue: #3978bd;
+      --line: #17324d;
+      --shadow: 0 10px 0 rgba(23, 50, 77, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      background-color: #f4ead2;
+      background-image:
+        linear-gradient(rgba(23, 50, 77, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 50, 77, 0.055) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    button { font: inherit; }
+
+    .app {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 36px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab-button {
+      flex: 1 1 0;
+      min-height: 54px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 4px 4px 0 var(--line);
+      font: 700 clamp(18px, 3vw, 24px) "Fredoka", sans-serif;
+      cursor: pointer;
+    }
+
+    .tab-button.is-active {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .tab-button:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--line);
+    }
+
+    .tab-panel.is-hidden { display: none; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 54px;
+      height: 54px;
+      place-items: center;
+      border: 3px solid var(--line);
+      border-radius: 50%;
+      background: var(--sun);
+      box-shadow: 4px 4px 0 var(--line);
+      font: 700 20px "Fredoka", sans-serif;
+    }
+
+    h1 {
+      margin: 0;
+      font: 700 clamp(24px, 4vw, 38px)/1 "Fredoka", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .progress-label {
+      min-width: 90px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .progress-track {
+      height: 10px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      border-radius: 5px;
+      background: var(--paper);
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--teal);
+      transition: width 280ms ease;
+    }
+
+    .groups {
+      display: flex;
+      gap: 9px;
+      padding: 3px 3px 12px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .group-button {
+      flex: 0 0 auto;
+      min-width: 64px;
+      padding: 9px 14px;
+      border: 2px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 3px 3px 0 var(--line);
+      font: 700 18px "Fredoka", sans-serif;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+
+    .group-button:hover { transform: translateY(-2px); }
+
+    .group-button.active {
+      color: #fff;
+      background: var(--coral);
+      box-shadow: 3px 3px 0 var(--line), inset 0 -3px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .lesson-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      min-height: 590px;
+      overflow: hidden;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .photo-panel {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      background: #d9e9e5;
+    }
+
+    .photo-panel::after {
+      position: absolute;
+      inset: 0;
+      border: 10px solid rgba(255, 255, 255, 0.6);
+      content: "";
+      pointer-events: none;
+    }
+
+    .word-visual {
+      width: 100%;
+      height: 100%;
+      min-height: 590px;
+      display: grid;
+      place-content: center;
+      gap: 20px;
+      padding: 36px;
+      color: var(--ink);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--coral) 22%, #d9e9e5), #fffdf4);
+      text-align: center;
+    }
+
+    .word-visual-icon {
+      max-width: 100%;
+      font-size: clamp(78px, 14vw, 170px);
+      line-height: 1;
+      letter-spacing: -0.08em;
+      white-space: nowrap;
+      filter: drop-shadow(7px 7px 0 rgba(23, 50, 77, 0.16));
+    }
+
+    .word-visual-label {
+      max-width: 20ch;
+      padding: 8px 14px;
+      border: 2px solid var(--line);
+      border-radius: 5px;
+      background: var(--paper);
+      box-shadow: 3px 3px 0 var(--line);
+      font: 700 clamp(20px, 3vw, 30px)/1.1 "Fredoka", sans-serif;
+      text-transform: capitalize;
+    }
+
+    .word-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 56px);
+      border-left: 3px solid var(--line);
+    }
+
+    .family-label,
+    .sound-line {
+      display: none !important;
+    }
+
+    .word-panel .speak-button {
+      margin-top: 12px;
+    }
+
+    .family-label {
+      align-self: flex-start;
+      margin: 0 0 16px;
+      padding: 7px 11px;
+      border: 2px solid var(--line);
+      border-radius: 5px;
+      background: var(--sun);
+      box-shadow: 3px 3px 0 var(--line);
+      font-weight: 700;
+    }
+
+    .word {
+      margin: 0 0 6px;
+      font: 700 260px/0.8 "Fredoka", sans-serif;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .word-start { color: var(--ink); }
+
+    .word-ending {
+      position: relative;
+      color: var(--coral);
+    }
+
+    .word-ending::after {
+      position: absolute;
+      right: 0;
+      bottom: -6px;
+      left: 0;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--sun);
+      content: "";
+      transform: rotate(-2deg);
+      z-index: -1;
+    }
+
+    .sound-line {
+      margin: 10px 0 22px;
+      color: var(--teal);
+      font: 700 26px "Fredoka", sans-serif;
+    }
+
+    .example {
+      min-height: 58px;
+      margin: 0 0 26px;
+      font-size: clamp(20px, 2.4vw, 27px);
+      line-height: 1.25;
+    }
+
+    .speak-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 54px;
+      border: 3px solid var(--line);
+      border-radius: 7px;
+      color: #fff;
+      background: var(--teal);
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .speaker-icon {
+      width: 0;
+      height: 0;
+      border-top: 9px solid transparent;
+      border-right: 14px solid #fff;
+      border-bottom: 9px solid transparent;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .nav-button, .shuffle-button {
+      min-height: 54px;
+      border: 3px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-button:last-child { background: var(--sun); }
+
+    .nav-button:active, .shuffle-button:active, .speak-button:active, .group-button:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--line);
+    }
+
+    .shuffle-button {
+      width: 54px;
+      padding: 0;
+      color: #fff;
+      background: var(--blue);
+      font-size: 24px;
+    }
+
+    .tip {
+      margin: 18px 0 0;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0.72;
+    }
+
+    .revision-section {
+      margin-top: 46px;
+      padding: clamp(22px, 4vw, 38px);
+      min-height: calc(100vh - 40px);
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .revision-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .revision-title {
+      margin: 0;
+      font: 700 clamp(28px, 4vw, 42px)/1 "Fredoka", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .revision-subtitle {
+      margin: 8px 0 0;
+      font-size: 18px;
+    }
+
+    .reshuffle-button {
+      flex: 0 0 auto;
+      min-height: 50px;
+      padding: 0 18px;
+      border: 3px solid var(--line);
+      border-radius: 7px;
+      color: #fff;
+      background: var(--blue);
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .reshuffle-button:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--line);
+    }
+
+    .revision-progress {
+      min-width: 78px;
+      padding: 8px 12px;
+      border: 2px solid var(--line);
+      border-radius: 5px;
+      background: var(--sun);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .revision-stage {
+      display: grid;
+      min-height: clamp(360px, 58vh, 640px);
+      place-items: center;
+      padding: 30px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: inset 0 0 0 10px rgba(245, 200, 75, 0.2);
+    }
+
+    .revision-word {
+      margin: 0;
+      font: 700 clamp(96px, 18vw, 220px)/0.9 "Fredoka", sans-serif;
+      letter-spacing: 0;
+      text-align: center;
+    }
+
+    .revision-ending {
+      color: var(--ending-color);
+      text-decoration: underline;
+      text-decoration-color: var(--sun);
+      text-decoration-thickness: 10px;
+      text-underline-offset: 12px;
+    }
+
+    .revision-controls {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .revision-nav-button {
+      min-height: 58px;
+      border: 3px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      background: #fff;
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .revision-nav-button:last-child { background: var(--sun); }
+
+    .revision-nav-button:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--line);
+    }
+
+.numbers-section {
+  margin-top: 46px;
+  padding: clamp(22px, 4vw, 38px);
+  border: 3px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.numbers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.numbers-title {
+  margin: 0;
+  font: 700 clamp(28px, 4vw, 42px)/1 "Fredoka", sans-serif;
+}
+
+.numbers-subtitle {
+  margin: 8px 0 0;
+  font-size: 18px;
+}
+
+.numbers-refresh {
+  flex: 0 0 auto;
+  min-width: 64px;
+  min-height: 56px;
+  padding: 0 18px;
+  border: 3px solid var(--line);
+  border-radius: 7px;
+  color: #fff;
+  background: var(--blue);
+  box-shadow: 4px 4px 0 var(--line);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.numbers-nav-button {
+  min-height: 56px;
+  border: 3px solid var(--line);
+  border-radius: 7px;
+  background: var(--sun);
+  box-shadow: 4px 4px 0 var(--line);
+  font: 700 18px "Fredoka", sans-serif;
+  cursor: pointer;
+}
+
+.numbers-refresh:active,
+.numbers-nav-button:active,
+.number-blank:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--line);
+}
+
+.numbers-progress {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  border: 3px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+}
+
+.numbers-stage {
+  display: grid;
+  place-items: center;
+  min-height: 46vh;
+  margin-bottom: 22px;
+}
+
+.numbers-controls {
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
+  gap: 14px;
+}
+
+.number-puzzle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(10px, 3vw, 32px);
+  width: 100%;
+  min-height: 220px;
+  padding: 24px;
+  border: 3px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: inset 0 0 0 10px rgba(245, 200, 75, 0.18);
+  font: 700 clamp(64px, 12vw, 120px)/1 "Fredoka", sans-serif;
+  text-align: center;
+}
+
+.number-blank {
+  width: min(100%, 150px);
+  min-height: 120px;
+  margin: auto;
+  border: 3px dashed var(--blue);
+  border-radius: 7px;
+  color: var(--blue);
+  background: #eef6ff;
+  box-shadow: 3px 3px 0 var(--line);
+  font: inherit;
+  cursor: pointer;
+}
+
+.number-blank.revealed {
+  border-style: solid;
+  color: #fff;
+  background: var(--teal);
+}
+
+    .choose-section {
+      padding: clamp(22px, 4vw, 38px);
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .choose-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 8px;
+    }
+
+    .choose-title {
+      margin: 0;
+      font: 700 clamp(28px, 4vw, 42px)/1 "Fredoka", sans-serif;
+    }
+
+    .choose-prompt {
+      margin: 10px 0 0;
+      font: 700 clamp(20px, 3vw, 28px) "Fredoka", sans-serif;
+    }
+
+    .choose-refresh {
+      flex: 0 0 auto;
+      min-width: 64px;
+      min-height: 56px;
+      padding: 0 18px;
+      border: 3px solid var(--line);
+      border-radius: 7px;
+      color: #fff;
+      background: var(--blue);
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .choose-refresh:active,
+    .choose-card:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--line);
+    }
+
+    .choose-stage {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .choose-card {
+      display: grid;
+      place-items: center;
+      min-height: 200px;
+      padding: 16px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 4px 4px 0 var(--line);
+      cursor: pointer;
+    }
+
+    .choose-card .choose-emoji {
+      line-height: 1;
+      font-size: clamp(70px, 16vw, 150px);
+    }
+
+    .choose-label {
+      margin-top: 10px;
+      font: 700 clamp(17px, 2.5vw, 22px) "Fredoka", sans-serif;
+      text-transform: capitalize;
+    }
+
+    .choose-card.correct { background: #d8f5df; border-color: var(--teal); }
+    .choose-card.wrong { background: #ffe0e0; border-color: #ed5b4f; }
+    .choose-card:disabled { cursor: default; }
+    .choose-card.is-name { min-height: 120px; }
+
+    .shape-object {
+      display: grid;
+      place-items: center;
+      min-height: 34vh;
+      margin-top: 20px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: inset 0 0 0 10px rgba(245, 200, 75, 0.18);
+      font-size: clamp(90px, 22vw, 200px);
+      line-height: 1;
+    }
+
+    .shape-name {
+      font: 700 clamp(22px, 3.5vw, 32px) "Fredoka", sans-serif;
+      text-transform: capitalize;
+    }
+
+    .choose-feedback {
+      margin: 20px 0 0;
+      min-height: 30px;
+      font: 700 clamp(20px, 3vw, 26px) "Fredoka", sans-serif;
+      text-align: center;
+    }
+    .choose-feedback.good { color: var(--teal); }
+    .choose-feedback.try { color: #ed5b4f; }
+
+    .quiz-section {
+      margin-top: 46px;
+      padding: clamp(22px, 4vw, 38px);
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .quiz-heading {
+      margin: 0;
+      font: 700 clamp(28px, 4vw, 42px)/1 "Fredoka", sans-serif;
+    }
+
+    .quiz-subtitle {
+      margin: 8px 0 0;
+      font-size: 18px;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-stat {
+      min-width: 96px;
+      padding: 8px 12px;
+      border: 2px solid var(--line);
+      border-radius: 5px;
+      background: var(--sun);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .quiz-refresh,
+    .quiz-next {
+      min-height: 52px;
+      padding: 0 20px;
+      border: 3px solid var(--line);
+      border-radius: 7px;
+      color: #fff;
+      background: var(--blue);
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .quiz-card {
+      min-height: 550px;
+      padding: clamp(20px, 4vw, 36px);
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: inset 0 0 0 10px rgba(57, 120, 189, 0.08);
+      text-align: center;
+    }
+
+    .quiz-kind {
+      display: inline-block;
+      margin: 0;
+      padding: 6px 12px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #dff4f1;
+      font-weight: 700;
+    }
+
+    .quiz-clue {
+      display: grid;
+      min-height: 170px;
+      place-items: center;
+      margin: 14px 0;
+      font: 700 clamp(64px, 14vw, 140px)/1 "Fredoka", sans-serif;
+      letter-spacing: 0.03em;
+    }
+
+    .quiz-clue.is-emoji { font-size: clamp(90px, 18vw, 170px); }
+    .quiz-clue.is-sequence { font-size: clamp(48px, 9vw, 92px); }
+
+    .quiz-prompt {
+      margin: 0 0 22px;
+      font: 700 clamp(22px, 3vw, 30px)/1.2 "Fredoka", sans-serif;
+    }
+
+    .quiz-choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .quiz-choice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 82px;
+      padding: 14px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--line);
+      font: 700 clamp(20px, 3vw, 28px) "Fredoka", sans-serif;
+      cursor: pointer;
+    }
+
+    .quiz-choice-emoji {
+      font-size: clamp(40px, 7vw, 66px);
+      line-height: 1;
+    }
+
+    .quiz-choice.correct { border-color: var(--teal); background: #d8f5df; }
+    .quiz-choice.wrong { border-color: var(--coral); background: #ffe0e0; }
+    .quiz-choice:disabled { color: var(--ink); cursor: default; opacity: 1; }
+
+    .quiz-feedback {
+      min-height: 34px;
+      margin: 20px 0 0;
+      font: 700 clamp(20px, 3vw, 26px) "Fredoka", sans-serif;
+    }
+
+    .quiz-feedback.good { color: var(--teal); }
+    .quiz-feedback.try { color: var(--coral); }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .quiz-refresh:active,
+    .quiz-next:active,
+    .quiz-choice:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--line);
+    }
+
+    @media (max-width: 780px) {
+      .app { width: min(100% - 20px, 620px); padding-top: 14px; }
+      .tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .brand-mark { width: 46px; height: 46px; }
+      .lesson-card { grid-template-columns: 1fr; min-height: 0; }
+      .photo-panel { min-height: 42vh; }
+      .word-visual { min-height: 42vh; }
+      .word-panel { padding: 26px 24px 30px; border-top: 3px solid var(--line); border-left: 0; }
+      .family-label { margin-bottom: 16px; }
+      .word { font-size: 170px; }
+      .example { min-height: 0; }
+      .tip { display: none; }
+      .revision-section { margin-top: 30px; min-height: calc(100vh - 20px); }
+      .revision-stage { min-height: 55vh; }
+      .revision-word { font-size: clamp(82px, 25vw, 150px); }
+      .numbers-section { margin-top: 30px; }
+      .numbers-stage { min-height: 40vh; }
+      .choose-stage { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+      .quiz-card { min-height: 500px; }
+    }
+
+    @media (max-width: 420px) {
+      .topbar { align-items: flex-start; }
+      .progress-label { min-width: 60px; font-size: 14px; }
+      .controls { grid-template-columns: 1fr 48px 1fr; gap: 9px; }
+      .nav-button, .shuffle-button { min-height: 50px; }
+      .revision-header { align-items: flex-start; }
+      .revision-subtitle { font-size: 16px; }
+      .revision-controls { grid-template-columns: 1fr 52px 1fr; gap: 9px; }
+      .revision-nav-button { min-height: 52px; }
+      .numbers-header { align-items: flex-start; }
+      .numbers-subtitle { font-size: 16px; }
+      .numbers-refresh { padding: 0; }
+      .numbers-controls { grid-template-columns: 1fr 56px 1fr; gap: 9px; }
+      .numbers-nav-button { min-height: 52px; }
+      .number-puzzle { min-height: 150px; font-size: clamp(52px, 16vw, 80px); }
+      .number-blank { min-height: 90px; }
+      .choose-header { align-items: flex-start; }
+      .choose-refresh { padding: 0; }
+      .choose-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .choose-card { min-height: 140px; }
+      .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tab-button { font-size: 17px; }
+      .quiz-header { display: block; }
+      .quiz-toolbar { justify-content: flex-start; margin-top: 16px; }
+      .quiz-refresh { min-width: 52px; padding: 0 12px; }
+      .quiz-card { min-height: 460px; padding: 20px 14px; }
+      .quiz-clue { min-height: 140px; }
+      .quiz-choices { gap: 10px; }
+      .quiz-choice { min-height: 76px; padding: 10px 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+
+    /* Shared Finance visual language */
+    :root {
+      color-scheme: light;
+      --ink: #171827;
+      --paper: rgba(255, 255, 255, 0.94);
+      --sun: #ece9ff;
+      --coral: #ee5675;
+      --teal: #169b74;
+      --blue: #6657ee;
+      --line: #e1e2eb;
+      --shadow: 0 10px 34px rgba(40, 42, 65, 0.06);
+      --muted: #777a8e;
+      --muted-2: #a5a8b7;
+      --panel-soft: #f3f3f7;
+      --nav: #191927;
+    }
+
+    body {
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(122, 104, 255, 0.08), transparent 28%),
+        #f5f6fa;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    ::selection {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(102, 87, 238, 0.2);
+      outline-offset: 2px;
+    }
+
+    .app {
+      width: min(1240px, calc(100% - 40px));
+      padding-top: 28px;
+    }
+
+    .topbar {
+      margin-bottom: 22px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      color: #fff;
+      background: var(--nav);
+      border: 0;
+      border-radius: 12px;
+      box-shadow: 0 7px 16px rgba(24, 24, 39, 0.2);
+      font: 800 13px Inter, sans-serif;
+    }
+
+    h1,
+    .revision-title,
+    .numbers-title,
+    .choose-title,
+    .quiz-heading {
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: -0.04em;
+    }
+
+    .progress-label,
+    .numbers-progress,
+    .revision-progress,
+    .quiz-stat {
+      color: #5d4fe0;
+      background: linear-gradient(135deg, #f5f3ff, #faf9ff);
+      border: 1px solid #e5e3f3;
+      border-radius: 10px;
+      box-shadow: none;
+    }
+
+    .tabs {
+      gap: 7px;
+      padding: 6px;
+      border: 1px solid rgba(228, 229, 237, 0.88);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 8px 26px rgba(40, 42, 65, 0.035);
+      backdrop-filter: blur(14px);
+    }
+
+    .tab-button {
+      min-height: 46px;
+      color: #6f7184;
+      background: transparent;
+      border: 0;
+      border-radius: 11px;
+      box-shadow: none;
+      font: 700 clamp(14px, 2vw, 17px) Inter, sans-serif;
+      transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .tab-button:hover {
+      color: var(--ink);
+      background: #f0eff8;
+    }
+
+    .tab-button.is-active {
+      color: #fff;
+      background: var(--nav);
+      box-shadow: 0 9px 20px rgba(24, 24, 39, 0.13);
+    }
+
+    .progress-track {
+      height: 8px;
+      border: 0;
+      background: #e8e8ef;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--blue), #8c7ffc);
+    }
+
+    .group-button,
+    .nav-button,
+    .shuffle-button,
+    .reshuffle-button,
+    .revision-nav-button,
+    .numbers-refresh,
+    .numbers-nav-button,
+    .choose-refresh,
+    .quiz-refresh,
+    .quiz-next {
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      box-shadow: none;
+      transition: color 160ms ease, background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .group-button {
+      color: #6f7184;
+      background: rgba(255, 255, 255, 0.86);
+      font-family: Inter, sans-serif;
+      font-size: 15px;
+    }
+
+    .group-button:hover {
+      color: var(--ink);
+      background: #f0eff8;
+      transform: translateY(-1px);
+    }
+
+    .group-button.active,
+    .shuffle-button,
+    .reshuffle-button,
+    .numbers-refresh,
+    .choose-refresh,
+    .quiz-refresh,
+    .quiz-next {
+      color: #fff;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .lesson-card,
+    .revision-section,
+    .numbers-section,
+    .choose-section,
+    .quiz-section {
+      border: 1px solid rgba(228, 229, 237, 0.9);
+      border-radius: 20px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .photo-panel {
+      background: #f3f1ff;
+    }
+
+    .photo-panel::after {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .word-visual {
+      background:
+        radial-gradient(circle at 20% 18%, rgba(238, 86, 117, 0.16), transparent 30%),
+        linear-gradient(135deg, #f3f1ff, #ffffff);
+    }
+
+    .word-panel,
+    .revision-stage,
+    .number-puzzle,
+    .choose-card,
+    .quiz-card,
+    .quiz-choice {
+      border-color: var(--line);
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .word-panel,
+    .revision-stage,
+    .number-puzzle,
+    .quiz-card {
+      box-shadow: inset 0 0 0 8px rgba(102, 87, 238, 0.035);
+    }
+
+    .word,
+    .revision-word,
+    .number-puzzle,
+    .choose-card,
+    .quiz-clue {
+      font-family: Fredoka, Inter, sans-serif;
+    }
+
+    .family-label,
+    .sound-line,
+    .tip,
+    .revision-subtitle,
+    .numbers-subtitle,
+    .quiz-subtitle,
+    .choose-feedback,
+    .quiz-feedback {
+      color: var(--muted);
+    }
+
+    .speak-button {
+      background: var(--coral);
+      border: 0;
+      box-shadow: 0 8px 20px rgba(238, 86, 117, 0.2);
+    }
+
+    .nav-button,
+    .revision-nav-button,
+    .numbers-nav-button {
+      color: #4d4f61;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-button:last-child,
+    .revision-nav-button:last-child,
+    .numbers-nav-button:last-child {
+      color: #fff;
+      background: var(--nav);
+      border-color: var(--nav);
+    }
+
+    .number-blank {
+      color: var(--blue);
+      background: var(--sun);
+      border: 2px dashed var(--blue);
+      border-radius: 12px;
+      box-shadow: none;
+    }
+
+    .number-blank.revealed {
+      color: #fff;
+      background: var(--teal);
+    }
+
+    .choose-card {
+      border-width: 1px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .choose-card:hover,
+    .quiz-choice:hover {
+      border-color: #bdb5ff;
+      background: #f7f6ff;
+      transform: translateY(-2px);
+    }
+
+    .choose-card.correct,
+    .quiz-choice.correct {
+      color: #11684f;
+      background: #e3f5ef;
+      border-color: var(--teal);
+    }
+
+    .choose-card.wrong,
+    .quiz-choice.wrong {
+      color: #a63850;
+      background: #ffedf1;
+      border-color: var(--coral);
+    }
+
+    .quiz-kind {
+      color: #5d4fe0;
+      background: var(--sun);
+    }
+
+    .tab-button:active,
+    .group-button:active,
+    .nav-button:active,
+    .shuffle-button:active,
+    .speak-button:active,
+    .reshuffle-button:active,
+    .revision-nav-button:active,
+    .numbers-refresh:active,
+    .numbers-nav-button:active,
+    .number-blank:active {
+      box-shadow: none;
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 780px) {
+      .app {
+        width: min(100% - 24px, 1240px);
+      }
+
+      .tabs {
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">RL</div>
+        <div>
+          <h1>Raghav Learning</h1>
+          <p class="brand-subtitle">A little learning adventure every day</p>
+        </div>
+      </div>
+      <div class="progress-label" id="progressLabel" aria-live="polite">⭐ 0 stars</div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Choose an activity">
+      <button class="tab-button is-active" id="tabEnglish" type="button" role="tab" aria-selected="true" aria-controls="panelEnglish">English</button>
+      <button class="tab-button" id="tabWords" type="button" role="tab" aria-selected="false" aria-controls="panelWords">Word Families</button>
+      <button class="tab-button" id="tabNumbers" type="button" role="tab" aria-selected="false" aria-controls="panelNumbers">Numbers</button>
+      <button class="tab-button" id="tabWeight" type="button" role="tab" aria-selected="false" aria-controls="panelWeight">Heavy &amp; Light</button>
+      <button class="tab-button" id="tabSize" type="button" role="tab" aria-selected="false" aria-controls="panelSize">Big &amp; Small</button>
+      <button class="tab-button" id="tabShapes" type="button" role="tab" aria-selected="false" aria-controls="panelShapes">Shapes</button>
+      <button class="tab-button" id="tabQuiz" type="button" role="tab" aria-selected="false" aria-controls="panelQuiz">Mixed Quiz</button>
+    </div>
+
+    <div class="tab-panel" id="panelEnglish" role="tabpanel" aria-labelledby="tabEnglish">
+      <section class="english-shell" aria-labelledby="englishTitle">
+        <header class="english-hero">
+          <div class="english-hero-copy">
+            <p class="english-eyebrow">English Sound Adventure</p>
+            <h2 id="englishTitle">Sounds become words.<br>Words become stories!</h2>
+            <p>Explore the sounds from your school book, practise them, and read every sentence aloud.</p>
+          </div>
+          <div class="english-hero-art" aria-hidden="true">
+            <span>📚</span>
+            <span>🔤</span>
+            <span>⭐</span>
+          </div>
+        </header>
+
+        <section class="english-progress-card" aria-labelledby="englishProgressTitle">
+          <div class="english-progress-heading">
+            <div>
+              <p class="english-kicker">My progress</p>
+              <h3 id="englishProgressTitle">Keep your star trail growing</h3>
+            </div>
+            <strong class="english-total-stars" id="englishTotalStars">⭐ 0</strong>
+          </div>
+          <div class="english-progress-track" aria-hidden="true">
+            <div class="english-progress-fill" id="englishProgressFill"></div>
+          </div>
+          <div class="english-stat-grid">
+            <div class="english-stat"><span aria-hidden="true">👀</span><strong id="englishLearnedStat">0</strong><small>words learned</small></div>
+            <div class="english-stat"><span aria-hidden="true">🎯</span><strong id="englishPractisedStat">0</strong><small>words practised</small></div>
+            <div class="english-stat"><span aria-hidden="true">📖</span><strong id="englishReadStat">0</strong><small>sentences read</small></div>
+            <div class="english-stat"><span aria-hidden="true">🔤</span><strong id="englishArticleStat">0/20</strong><small>A or An words</small></div>
+            <div class="english-stat"><span aria-hidden="true">🏆</span><strong id="englishQuizStat">0/10</strong><small>best quiz</small></div>
+          </div>
+        </section>
+
+        <nav class="english-journey" aria-label="English learning steps">
+          <button class="english-step is-active" type="button" data-english-stage="learn" aria-pressed="true">
+            <span class="english-step-number">1</span><span><strong>Learn</strong><small>Meet the sounds</small></span>
+          </button>
+          <button class="english-step" type="button" data-english-stage="practice" aria-pressed="false">
+            <span class="english-step-number">2</span><span><strong>Practise</strong><small>Play and remember</small></span>
+          </button>
+          <button class="english-step" type="button" data-english-stage="read" aria-pressed="false">
+            <span class="english-step-number">3</span><span><strong>Read</strong><small>Say full sentences</small></span>
+          </button>
+          <button class="english-step" type="button" data-english-stage="articles" aria-pressed="false">
+            <span class="english-step-number">4</span><span><strong>A or An</strong><small>Choose the article</small></span>
+          </button>
+          <button class="english-step" type="button" data-english-stage="quiz" aria-pressed="false">
+            <span class="english-step-number">5</span><span><strong>Quiz</strong><small>Win your trophy</small></span>
+          </button>
+          <button class="english-step" type="button" data-english-stage="revision" aria-pressed="false">
+            <span class="english-step-number">6</span><span><strong>Revise</strong><small>Mix every word</small></span>
+          </button>
+        </nav>
+
+        <div class="english-stage" id="englishStage" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <div class="tab-panel is-hidden" id="panelWords" role="tabpanel" aria-labelledby="tabWords" hidden>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <nav class="groups" id="groups" aria-label="Choose a word ending"></nav>
+
+    <section class="lesson-card" aria-live="polite">
+      <div class="photo-panel">
+        <div class="word-visual" id="wordVisual" role="img">
+          <span class="word-visual-icon" id="wordVisualIcon" aria-hidden="true"></span>
+          <span class="word-visual-label" id="wordVisualLabel"></span>
+        </div>
+      </div>
+
+      <div class="word-panel">
+        <p class="family-label" id="familyLabel">-nd family</p>
+        <h2 class="word" id="word"></h2>
+        <p class="sound-line" id="soundLine">ends with /nd/</p>
+        <p class="example" id="example"></p>
+        <button class="speak-button" id="speakButton" type="button">
+          <span class="speaker-icon" aria-hidden="true"></span>
+          Hear the word
+        </button>
+      </div>
+    </section>
+
+    <div class="controls">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous word">&#8592; Previous</button>
+      <button class="shuffle-button" id="shuffleButton" type="button" aria-label="Show a random word" title="Random word">&#8635;</button>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next word">Next &#8594;</button>
+    </div>
+    <p class="tip">Use the arrow keys to move. Press the space bar to hear the word.</p>
+
+    <section class="revision-section" aria-labelledby="revisionTitle">
+      <header class="revision-header">
+        <div>
+          <h2 class="revision-title" id="revisionTitle">Mixed-up revision</h2>
+          <p class="revision-subtitle">Read the big word, then press Next.</p>
+        </div>
+        <div class="revision-progress" id="revisionProgress">1 of 99</div>
+      </header>
+      <div class="revision-stage" aria-live="polite">
+        <p class="revision-word" id="revisionWord"></p>
+      </div>
+      <div class="revision-controls">
+        <button class="revision-nav-button" id="revisionPreviousButton" type="button">&#8592; Previous</button>
+        <button class="reshuffle-button" id="reshuffleButton" type="button" aria-label="Mix the revision words" title="Mix again">&#8635;</button>
+        <button class="revision-nav-button" id="revisionNextButton" type="button">Next &#8594;</button>
+      </div>
+    </section>
+    </div>
+
+    <div class="tab-panel is-hidden" id="panelNumbers" role="tabpanel" aria-labelledby="tabNumbers" hidden>
+    <section class="numbers-section" aria-labelledby="numbersTitle">
+      <header class="numbers-header">
+        <div>
+          <h2 class="numbers-title" id="numbersTitle">Missing Numbers 1–50</h2>
+          <p class="numbers-subtitle">Count forwards or backwards. Tap the blank to reveal the answer.</p>
+        </div>
+        <div class="numbers-progress" id="numbersProgress">1 of 10</div>
+      </header>
+      <div class="numbers-stage" aria-live="polite">
+        <div class="number-puzzle" id="numberPuzzle" aria-label="Missing number puzzle"></div>
+      </div>
+      <div class="numbers-controls">
+        <button class="numbers-nav-button" id="numbersPreviousButton" type="button">&#8592; Previous</button>
+        <button class="numbers-refresh" id="numbersRefresh" type="button" aria-label="Create new missing-number puzzles" title="New puzzles">&#8635;</button>
+        <button class="numbers-nav-button" id="numbersNextButton" type="button">Next &#8594;</button>
+      </div>
+    </section>
+    </div>
+
+    <div class="tab-panel is-hidden" id="panelWeight" role="tabpanel" aria-labelledby="tabWeight" hidden>
+      <section class="choose-section" aria-labelledby="weightTitle">
+        <header class="choose-header">
+          <div>
+            <h2 class="choose-title" id="weightTitle">Heavy &amp; Light</h2>
+            <p class="choose-prompt" id="weightPrompt"></p>
+          </div>
+          <button class="choose-refresh" id="weightRefresh" type="button" aria-label="New heavy and light puzzle" title="New puzzle">&#8635;</button>
+        </header>
+        <div class="choose-stage" id="weightStage" aria-live="polite"></div>
+        <p class="choose-feedback" id="weightFeedback" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <div class="tab-panel is-hidden" id="panelSize" role="tabpanel" aria-labelledby="tabSize" hidden>
+      <section class="choose-section" aria-labelledby="sizeTitle">
+        <header class="choose-header">
+          <div>
+            <h2 class="choose-title" id="sizeTitle">Big &amp; Small</h2>
+            <p class="choose-prompt" id="sizePrompt"></p>
+          </div>
+          <button class="choose-refresh" id="sizeRefresh" type="button" aria-label="New big and small puzzle" title="New puzzle">&#8635;</button>
+        </header>
+        <div class="choose-stage" id="sizeStage" aria-live="polite"></div>
+        <p class="choose-feedback" id="sizeFeedback" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <div class="tab-panel is-hidden" id="panelShapes" role="tabpanel" aria-labelledby="tabShapes" hidden>
+      <section class="choose-section" aria-labelledby="shapesTitle">
+        <header class="choose-header">
+          <div>
+            <h2 class="choose-title" id="shapesTitle">Shapes</h2>
+            <p class="choose-prompt" id="shapesPrompt"></p>
+          </div>
+          <button class="choose-refresh" id="shapesRefresh" type="button" aria-label="New shapes puzzle" title="New puzzle">&#8635;</button>
+        </header>
+        <div class="shape-object" id="shapesObject" role="img"></div>
+        <div class="choose-stage" id="shapesStage" aria-live="polite"></div>
+        <p class="choose-feedback" id="shapesFeedback" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <div class="tab-panel is-hidden" id="panelQuiz" role="tabpanel" aria-labelledby="tabQuiz" hidden>
+      <section class="quiz-section" aria-labelledby="quizTitle">
+        <header class="quiz-header">
+          <div>
+            <h2 class="quiz-heading" id="quizTitle">Mixed Skills Quiz</h2>
+            <p class="quiz-subtitle">Try ten questions about words, numbers, size, weight, and shapes.</p>
+          </div>
+          <div class="quiz-toolbar">
+            <span class="quiz-stat" id="quizProgress">1 of 10</span>
+            <span class="quiz-stat" id="quizScore">0 correct</span>
+            <button class="quiz-refresh" id="quizRestart" type="button" aria-label="Start a new quiz" title="New quiz">&#8635;</button>
+          </div>
+        </header>
+        <div class="quiz-card">
+          <p class="quiz-kind" id="quizKind"></p>
+          <div class="quiz-clue" id="quizClue"></div>
+          <p class="quiz-prompt" id="quizPrompt"></p>
+          <div class="quiz-choices" id="quizChoices"></div>
+          <p class="quiz-feedback" id="quizFeedback" role="status" aria-live="polite"></p>
+          <div class="quiz-actions">
+            <button class="quiz-next" id="quizNext" type="button" hidden>Next question &#8594;</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./english-module.js?v=20260915-1"></script>
+  <script>
+    const words = [
+      { word: "band", ending: "nd", photo: "music band performing", example: "The band plays music." },
+      { word: "hand", ending: "nd", photo: "child hand", example: "Raise your hand." },
+      { word: "land", ending: "nd", photo: "green land field", example: "The plane will land." },
+      { word: "sand", ending: "nd", photo: "beach sand", example: "I build with sand." },
+      { word: "bend", ending: "nd", photo: "person bending", example: "Bend down low." },
+      { word: "lend", ending: "nd", photo: "child lending pencil", example: "Please lend me a pencil." },
+      { word: "mend", ending: "nd", photo: "sewing torn cloth", example: "We can mend the tear." },
+      { word: "send", ending: "nd", photo: "mailing letter", example: "Send the letter today." },
+      { word: "wind", ending: "nd", photo: "wind blowing trees", example: "The wind moves the trees." },
+      { word: "bond", ending: "nd", photo: "parent child holding hands", example: "They share a close bond." },
+      { word: "fond", ending: "nd", photo: "child hugging teddy bear", example: "She is fond of her bear." },
+      { word: "pond", ending: "nd", photo: "small pond", example: "A duck swims in the pond." },
+      { word: "find", ending: "nd", photo: "magnifying glass finding a star", example: "Find the hidden star." },
+      { word: "kind", ending: "nd", photo: "friends sharing a heart", example: "Be kind to your friend." },
+      { word: "mind", ending: "nd", photo: "brain thinking", example: "Use your mind to solve it." },
+      { word: "rind", ending: "nd", photo: "orange rind", example: "The orange rind smells fresh." },
+
+      { word: "bang", ending: "ng", photo: "drum being played", example: "Bang the drum!" },
+      { word: "hang", ending: "ng", photo: "hanging coat on hook", example: "Hang up your coat." },
+      { word: "sang", ending: "ng", photo: "child singing", example: "She sang a happy song." },
+      { word: "fang", ending: "ng", photo: "snake fang close up", example: "The snake has a sharp fang." },
+      { word: "ring", ending: "ng", photo: "gold ring", example: "The ring is shiny." },
+      { word: "sing", ending: "ng", photo: "children singing", example: "We sing together." },
+      { word: "long", ending: "ng", photo: "long road", example: "It is a long road." },
+      { word: "king", ending: "ng", photo: "king wearing a crown", example: "The king wears a crown." },
+      { word: "song", ending: "ng", photo: "musical notes", example: "We sang a cheerful song." },
+      { word: "wing", ending: "ng", photo: "bird wing", example: "The bird flaps one wing." },
+
+      { word: "pant", ending: "nt", photo: "dog panting", example: "The hot dog will pant." },
+      { word: "bent", ending: "nt", photo: "bent metal spoon", example: "The spoon is bent." },
+      { word: "tent", ending: "nt", photo: "camping tent", example: "We sleep in a tent." },
+      { word: "dent", ending: "nt", photo: "dent in car door", example: "The car has a dent." },
+      { word: "went", ending: "nt", photo: "child walking away", example: "We went for a walk." },
+      { word: "font", ending: "nt", photo: "printing letterpress type", example: "This font has big letters." },
+      { word: "mint", ending: "nt", photo: "fresh mint leaves", example: "Mint smells fresh." },
+      { word: "hunt", ending: "nt", photo: "magnifying glass clue hunt", example: "We hunt for clues." },
+      { word: "lint", ending: "nt", photo: "lint brush and jumper", example: "Brush the lint off the jumper." },
+
+      { word: "bank", ending: "nk", photo: "bank building", example: "The money is in the bank." },
+      { word: "rank", ending: "nk", photo: "athletes winners podium", example: "She earned the top rank." },
+      { word: "sank", ending: "nk", photo: "toy boat sinking water", example: "The toy boat sank." },
+      { word: "tank", ending: "nk", photo: "water storage tank", example: "The tank is full of water." },
+      { word: "link", ending: "nk", photo: "metal chain link", example: "This link joins the chain." },
+      { word: "sink", ending: "nk", photo: "kitchen sink", example: "Wash it in the sink." },
+      { word: "honk", ending: "nk", photo: "car horn traffic", example: "The car horn goes honk." },
+      { word: "monk", ending: "nk", photo: "Buddhist monk", example: "The monk walks quietly." },
+      { word: "wink", ending: "nk", photo: "child winking", example: "Give me a wink." },
+      { word: "bunk", ending: "nk", photo: "bunk bed", example: "I sleep on the top bunk." },
+      { word: "dunk", ending: "nk", photo: "basketball dunk", example: "He can dunk the ball." },
+      { word: "sunk", ending: "nk", photo: "sunken boat underwater", example: "The boat has sunk." },
+      { word: "pink", ending: "nk", photo: "pink heart", example: "Pink is a bright colour." },
+      { word: "junk", ending: "nk", photo: "junk in a bin", example: "Put the junk in the bin." },
+      { word: "rink", ending: "nk", photo: "ice skating rink", example: "Skate around the rink." },
+
+      { word: "milk", ending: "lk", photo: "glass of milk", example: "I drink a glass of milk." },
+      { word: "bulk", ending: "lk", photo: "bulk grain sacks", example: "Rice is sold in bulk." },
+      { word: "hulk", ending: "lk", photo: "large ship hulk", example: "The old hulk sat by the shore." },
+      { word: "sulk", ending: "lk", photo: "upset child sitting", example: "Do not sulk when a game ends." },
+      { word: "silk", ending: "lk", photo: "silk scarf", example: "The scarf is made of silk." },
+      { word: "yolk", ending: "lk", photo: "fried egg yolk", example: "The egg yolk is yellow." },
+      { word: "walk", ending: "lk", photo: "child walking", example: "We walk to the park." },
+      { word: "talk", ending: "lk", photo: "friends talking", example: "Talk to your partner." },
+
+      { word: "belt", ending: "lt", photo: "leather belt", example: "The belt goes around your waist." },
+      { word: "felt", ending: "lt", photo: "colorful felt fabric", example: "The soft hat is made of felt." },
+      { word: "melt", ending: "lt", photo: "melting ice cube", example: "The ice will melt." },
+      { word: "silt", ending: "lt", photo: "river silt mud", example: "The river leaves soft silt." },
+      { word: "tilt", ending: "lt", photo: "tilted cup", example: "Tilt the cup a little." },
+      { word: "salt", ending: "lt", photo: "salt shaker", example: "Sprinkle a little salt." },
+      { word: "bolt", ending: "lt", photo: "metal bolt", example: "Tighten the metal bolt." },
+      { word: "colt", ending: "lt", photo: "young horse colt", example: "The colt runs beside its mother." },
+
+      { word: "raft", ending: "ft", photo: "wooden raft on river", example: "The raft floats on water." },
+      { word: "left", ending: "ft", photo: "left arrow sign", example: "Turn left at the sign." },
+      { word: "gift", ending: "ft", photo: "wrapped gift", example: "This gift is for you." },
+      { word: "sift", ending: "ft", photo: "sifting flour sieve", example: "Sift the flour." },
+      { word: "loft", ending: "ft", photo: "loft room", example: "The loft is upstairs." },
+      { word: "soft", ending: "ft", photo: "soft fluffy blanket", example: "The blanket is soft." },
+      { word: "lift", ending: "ft", photo: "lifting a box", example: "Lift the box carefully." },
+      { word: "waft", ending: "ft", photo: "sweet smell drifting", example: "The smell can waft through the room." },
+      { word: "tuft", ending: "ft", photo: "tuft of grass", example: "A tuft of grass grew by the path." },
+
+      { word: "camp", ending: "mp", photo: "family camping", example: "We camp under the stars." },
+      { word: "lamp", ending: "mp", photo: "table lamp", example: "Turn on the lamp." },
+      { word: "ramp", ending: "mp", photo: "wheelchair ramp", example: "Roll up the ramp." },
+      { word: "limp", ending: "mp", photo: "person limping leg injury", example: "He had a limp after the fall." },
+      { word: "dump", ending: "mp", photo: "dump truck", example: "The truck can dump the sand." },
+      { word: "hump", ending: "mp", photo: "camel hump", example: "A camel has a hump." },
+      { word: "jump", ending: "mp", photo: "child jumping", example: "Jump up high!" },
+      { word: "bump", ending: "mp", photo: "small bump on a head", example: "I felt a bump on my head." },
+      { word: "damp", ending: "mp", photo: "damp towel", example: "The towel is still damp." },
+      { word: "lump", ending: "mp", photo: "lump of clay", example: "Roll the lump of clay." },
+      { word: "pump", ending: "mp", photo: "fuel pump", example: "The pump sends fuel into the car." },
+
+      { word: "best", ending: "st", photo: "gold winner medal", example: "Try your best." },
+      { word: "fast", ending: "st", photo: "fast racing car", example: "The racing car is fast." },
+      { word: "last", ending: "st", photo: "child last in line", example: "I am last in line." },
+      { word: "list", ending: "st", photo: "written checklist", example: "Write it on the list." },
+      { word: "mist", ending: "st", photo: "mist over hills", example: "The hill is hidden by mist." },
+      { word: "nest", ending: "st", photo: "bird nest with eggs", example: "The bird sits in its nest." },
+      { word: "rest", ending: "st", photo: "child resting in bed", example: "Sit down and rest." },
+      { word: "vest", ending: "st", photo: "bright safety vest", example: "Wear a bright vest." },
+
+      { word: "desk", ending: "sk", photo: "school desk", example: "Put the book on the desk." },
+      { word: "disk", ending: "sk", photo: "shiny computer disk", example: "The disk is round and shiny." },
+      { word: "mask", ending: "sk", photo: "colourful face mask", example: "The mask covers her face." },
+      { word: "task", ending: "sk", photo: "completed task tick", example: "Finish one task at a time." },
+      { word: "tusk", ending: "sk", photo: "elephant tusk", example: "The elephant has a long tusk." }
+    ];
+
+    const endingOrder = ["nd", "ng", "nt", "nk", "lk", "lt", "ft", "mp", "st", "sk"];
+    const groupColors = {
+      nd: "#ed5b4f", ng: "#3978bd", nt: "#128b82", nk: "#c64f78",
+      lk: "#6f65ae", lt: "#db6f2e", ft: "#158064", mp: "#d3483f",
+      st: "#7c5c24", sk: "#7b4aa8"
+    };
+
+    const wordVisuals = {
+      band: "🎸🥁🎤", hand: "✋", land: "🌄", sand: "🏖️", bend: "🤸", lend: "✏️➡️🤲", mend: "🪡🧵", send: "✉️➡️", wind: "💨🌳", bond: "🤝❤️", fond: "🧒❤️🧸", pond: "🦆💧🌿", find: "🔎⭐", kind: "🤲💛", mind: "🧠💭", rind: "🍊🟠",
+      bang: "🥁💥", hang: "🧥🪝", sang: "🎤🎵", fang: "🐍🦷", ring: "💍", sing: "🎤🎶", long: "🛣️↔️", king: "👑", song: "🎵", wing: "🪽",
+      pant: "🐕💨", bent: "🥄↪️", tent: "⛺", dent: "🚗💥", went: "🚶➡️", font: "🔤", mint: "🌿", hunt: "🔎🗺️", lint: "👕🧶",
+      bank: "🏦", rank: "🥇🏆", sank: "🚢⬇️🌊", tank: "🛢️💧", link: "🔗", sink: "🚰🫧", honk: "🚗📣", monk: "🧘", wink: "😉", bunk: "🛏️🛏️", dunk: "🏀⬇️", sunk: "⛵⬇️🌊", pink: "🩷", junk: "🗑️📦", rink: "⛸️🧊",
+      milk: "🥛", bulk: "📦📦📦", hulk: "🚢⚓", sulk: "😞🪑", silk: "🧣✨", yolk: "🍳", walk: "🚶", talk: "🗣️💬",
+      belt: "👖➰", felt: "🟫✂️", melt: "🧊💧", silt: "🌊🟤", tilt: "🥤↘️", salt: "🧂", bolt: "🔩", colt: "🐴👶",
+      raft: "🪵🪵🌊", left: "⬅️", gift: "🎁", sift: "🌾➡️🥣", loft: "🏠⬆️", soft: "🧸☁️", lift: "📦⬆️", waft: "🌸〰️", tuft: "🌱🌱",
+      camp: "⛺🔥", lamp: "💡", ramp: "♿↗️", limp: "🩼🚶", dump: "🚚⬇️", hump: "🐪", jump: "🧒⬆️", bump: "🤕", damp: "👕💧", lump: "🪨", pump: "⛽",
+      best: "🏆", fast: "🏎️💨", last: "🚶🔚", list: "📝", mist: "🌫️⛰️", nest: "🪹🥚", rest: "🛌💤", vest: "🦺",
+      desk: "🪑📚", disk: "💿", mask: "🎭", task: "✅", tusk: "🐘🦷"
+    };
+
+    let currentIndex = 0;
+
+    const elements = {
+      groups: document.querySelector("#groups"),
+      progressLabel: document.querySelector("#progressLabel"),
+      progressFill: document.querySelector("#progressFill"),
+      visual: document.querySelector("#wordVisual"),
+      visualIcon: document.querySelector("#wordVisualIcon"),
+      visualLabel: document.querySelector("#wordVisualLabel"),
+      familyLabel: document.querySelector("#familyLabel"),
+      word: document.querySelector("#word"),
+      soundLine: document.querySelector("#soundLine"),
+      example: document.querySelector("#example"),
+      speakButton: document.querySelector("#speakButton"),
+      previousButton: document.querySelector("#previousButton"),
+      nextButton: document.querySelector("#nextButton"),
+      shuffleButton: document.querySelector("#shuffleButton"),
+      reshuffleButton: document.querySelector("#reshuffleButton"),
+      revisionWord: document.querySelector("#revisionWord"),
+      revisionProgress: document.querySelector("#revisionProgress"),
+      revisionPreviousButton: document.querySelector("#revisionPreviousButton"),
+      revisionNextButton: document.querySelector("#revisionNextButton"),
+      tabEnglish: document.querySelector("#tabEnglish"),
+      tabWords: document.querySelector("#tabWords"),
+      tabNumbers: document.querySelector("#tabNumbers"),
+      panelEnglish: document.querySelector("#panelEnglish"),
+      panelWords: document.querySelector("#panelWords"),
+      panelNumbers: document.querySelector("#panelNumbers"),
+      numberPuzzle: document.querySelector("#numberPuzzle"),
+      numbersProgress: document.querySelector("#numbersProgress"),
+      numbersPreviousButton: document.querySelector("#numbersPreviousButton"),
+      numbersNextButton: document.querySelector("#numbersNextButton"),
+      numbersRefresh: document.querySelector("#numbersRefresh"),
+      tabWeight: document.querySelector("#tabWeight"),
+      tabSize: document.querySelector("#tabSize"),
+      tabShapes: document.querySelector("#tabShapes"),
+      tabQuiz: document.querySelector("#tabQuiz"),
+      panelWeight: document.querySelector("#panelWeight"),
+      panelSize: document.querySelector("#panelSize"),
+      panelShapes: document.querySelector("#panelShapes"),
+      panelQuiz: document.querySelector("#panelQuiz"),
+      weightPrompt: document.querySelector("#weightPrompt"),
+      weightStage: document.querySelector("#weightStage"),
+      weightFeedback: document.querySelector("#weightFeedback"),
+      weightRefresh: document.querySelector("#weightRefresh"),
+      sizePrompt: document.querySelector("#sizePrompt"),
+      sizeStage: document.querySelector("#sizeStage"),
+      sizeFeedback: document.querySelector("#sizeFeedback"),
+      sizeRefresh: document.querySelector("#sizeRefresh"),
+      shapesPrompt: document.querySelector("#shapesPrompt"),
+      shapesObject: document.querySelector("#shapesObject"),
+      shapesStage: document.querySelector("#shapesStage"),
+      shapesFeedback: document.querySelector("#shapesFeedback"),
+      shapesRefresh: document.querySelector("#shapesRefresh"),
+      quizProgress: document.querySelector("#quizProgress"),
+      quizScore: document.querySelector("#quizScore"),
+      quizRestart: document.querySelector("#quizRestart"),
+      quizKind: document.querySelector("#quizKind"),
+      quizClue: document.querySelector("#quizClue"),
+      quizPrompt: document.querySelector("#quizPrompt"),
+      quizChoices: document.querySelector("#quizChoices"),
+      quizFeedback: document.querySelector("#quizFeedback"),
+      quizNext: document.querySelector("#quizNext")
+    };
+
+function shuffle(items) {
+  for (let index = items.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [items[index], items[randomIndex]] = [items[randomIndex], items[index]];
+  }
+  return items;
+}
+
+let numberPuzzles = [];
+let numberIndex = 0;
+
+function createNumberPuzzle(direction) {
+  const first = direction === 1
+    ? Math.floor(Math.random() * 48) + 1
+    : Math.floor(Math.random() * 48) + 3;
+  return {
+    numbers: [first, first + direction, first + (2 * direction)],
+    missingIndex: Math.floor(Math.random() * 3)
+  };
+}
+
+function renderNumberPuzzle() {
+  const { numbers, missingIndex, revealed } = numberPuzzles[numberIndex];
+  elements.numbersProgress.textContent = `${numberIndex + 1} of ${numberPuzzles.length}`;
+  elements.numberPuzzle.replaceChildren();
+
+  numbers.forEach((number, index) => {
+    if (index !== missingIndex) {
+      const value = document.createElement("span");
+      value.textContent = number;
+      elements.numberPuzzle.append(value);
+      return;
+    }
+
+    const blank = document.createElement("button");
+    blank.className = "number-blank";
+    blank.type = "button";
+    if (revealed) {
+      blank.textContent = number;
+      blank.classList.add("revealed");
+      blank.setAttribute("aria-label", `The missing number is ${number}`);
+      blank.disabled = true;
+    } else {
+      blank.textContent = "?";
+      blank.setAttribute("aria-label", "Reveal the missing number");
+      blank.addEventListener("click", () => {
+        numberPuzzles[numberIndex].revealed = true;
+        renderNumberPuzzle();
+      });
+    }
+    elements.numberPuzzle.append(blank);
+  });
+}
+
+function moveNumber(step) {
+  numberIndex = (numberIndex + step + numberPuzzles.length) % numberPuzzles.length;
+  renderNumberPuzzle();
+}
+
+function generateNumberPuzzles() {
+  numberPuzzles = shuffle([
+    ...Array.from({ length: 5 }, () => createNumberPuzzle(1)),
+    ...Array.from({ length: 5 }, () => createNumberPuzzle(-1))
+  ]).map((puzzle) => ({ ...puzzle, revealed: false }));
+  numberIndex = 0;
+  renderNumberPuzzle();
+}
+
+    const weightItems = [
+      { emoji: "🐘", label: "elephant", heavy: true }, { emoji: "🪶", label: "feather", heavy: false },
+      { emoji: "🚚", label: "truck", heavy: true }, { emoji: "🎈", label: "balloon", heavy: false },
+      { emoji: "🐳", label: "whale", heavy: true }, { emoji: "🍂", label: "leaf", heavy: false },
+      { emoji: "🪨", label: "rock", heavy: true }, { emoji: "🧻", label: "tissue", heavy: false },
+      { emoji: "🚜", label: "tractor", heavy: true }, { emoji: "🦋", label: "butterfly", heavy: false },
+      { emoji: "🏠", label: "house", heavy: true }, { emoji: "🍿", label: "popcorn", heavy: false },
+      { emoji: "🚗", label: "car", heavy: true }, { emoji: "🫧", label: "soap bubble", heavy: false },
+      { emoji: "🚌", label: "bus", heavy: true }, { emoji: "🛩️", label: "paper aeroplane", heavy: false },
+      { emoji: "🚂", label: "train", heavy: true }, { emoji: "☁️", label: "cotton ball", heavy: false },
+      { emoji: "🎹", label: "piano", heavy: true }, { emoji: "🏷️", label: "postage stamp", heavy: false },
+      { emoji: "🗿", label: "stone statue", heavy: true }, { emoji: "🔘", label: "button", heavy: false },
+      { emoji: "🦛", label: "hippopotamus", heavy: true }, { emoji: "🧵", label: "thread", heavy: false }
+    ];
+
+    const sizeItems = [
+      { emoji: "🐘", label: "elephant", big: true },
+      { emoji: "🐳", label: "whale", big: true },
+      { emoji: "🌳", label: "tree", big: true },
+      { emoji: "🚌", label: "bus", big: true },
+      { emoji: "🦕", label: "dinosaur", big: true },
+      { emoji: "🏔️", label: "mountain", big: true },
+      { emoji: "🦒", label: "giraffe", big: true },
+      { emoji: "🏢", label: "tall building", big: true },
+      { emoji: "🚢", label: "ship", big: true },
+      { emoji: "🚂", label: "train", big: true },
+      { emoji: "🏰", label: "castle", big: true },
+      { emoji: "🦈", label: "shark", big: true },
+      { emoji: "🦛", label: "hippopotamus", big: true },
+      { emoji: "🦏", label: "rhinoceros", big: true },
+      { emoji: "✈️", label: "aeroplane", big: true },
+      { emoji: "🚀", label: "rocket", big: true },
+      { emoji: "🏟️", label: "stadium", big: true },
+      { emoji: "🌉", label: "bridge", big: true },
+      { emoji: "🗼", label: "tower", big: true },
+      { emoji: "🦣", label: "mammoth", big: true },
+      { emoji: "🐁", label: "mouse", big: false },
+      { emoji: "🐜", label: "ant", big: false },
+      { emoji: "🐞", label: "ladybird", big: false },
+      { emoji: "🐝", label: "bee", big: false },
+      { emoji: "🐌", label: "snail", big: false },
+      { emoji: "🐛", label: "caterpillar", big: false },
+      { emoji: "🪲", label: "beetle", big: false },
+      { emoji: "🌱", label: "sprout", big: false },
+      { emoji: "🍓", label: "strawberry", big: false },
+      { emoji: "🍪", label: "cookie", big: false },
+      { emoji: "🥚", label: "egg", big: false },
+      { emoji: "🖍️", label: "crayon", big: false },
+      { emoji: "🪶", label: "feather", big: false },
+      { emoji: "🪙", label: "coin", big: false },
+      { emoji: "🫘", label: "bean", big: false },
+      { emoji: "🫐", label: "blueberry", big: false },
+      { emoji: "🐚", label: "shell", big: false },
+      { emoji: "🔑", label: "key", big: false },
+      { emoji: "📎", label: "paperclip", big: false },
+      { emoji: "🔵", label: "marble", big: false }
+    ];
+
+    const shapeObjects = [
+      { emoji: "⚽", label: "ball", shape: "circle" },
+      { emoji: "🏀", label: "basketball", shape: "circle" },
+      { emoji: "🎾", label: "tennis ball", shape: "circle" },
+      { emoji: "🕐", label: "clock", shape: "circle" },
+      { emoji: "🍪", label: "cookie", shape: "circle" },
+      { emoji: "🪙", label: "coin", shape: "circle" },
+      { emoji: "🎈", label: "balloon", shape: "circle" },
+      { emoji: "🍩", label: "doughnut", shape: "circle" },
+      { emoji: "🍊", label: "orange", shape: "circle" },
+      { emoji: "💿", label: "disc", shape: "circle" },
+      { emoji: "🛞", label: "wheel", shape: "circle" },
+      { emoji: "🥏", label: "flying disc", shape: "circle" },
+      { emoji: "🎁", label: "present", shape: "square" },
+      { emoji: "🪟", label: "window", shape: "square" },
+      { emoji: "🧊", label: "ice cube", shape: "square" },
+      { emoji: "🎲", label: "dice", shape: "square" },
+      { emoji: "🟫", label: "square tile", shape: "square" },
+      { emoji: "🍕", label: "pizza slice", shape: "triangle" },
+      { emoji: "🧀", label: "cheese wedge", shape: "triangle" },
+      { emoji: "🔺", label: "red triangle", shape: "triangle" },
+      { emoji: "🍙", label: "rice ball", shape: "triangle" },
+      { emoji: "📐", label: "set square", shape: "triangle" },
+      { emoji: "⛺", label: "tent", shape: "triangle" },
+      { emoji: "📺", label: "television", shape: "rectangle" },
+      { emoji: "🚪", label: "door", shape: "rectangle" },
+      { emoji: "🍫", label: "chocolate bar", shape: "rectangle" },
+      { emoji: "📖", label: "book", shape: "rectangle" },
+      { emoji: "📱", label: "phone", shape: "rectangle" },
+      { emoji: "✉️", label: "envelope", shape: "rectangle" },
+      { emoji: "💳", label: "bank card", shape: "rectangle" },
+      { emoji: "📅", label: "calendar", shape: "rectangle" },
+      { emoji: "📰", label: "newspaper", shape: "rectangle" },
+      { emoji: "🎟️", label: "ticket", shape: "rectangle" },
+      { emoji: "⌨️", label: "keyboard", shape: "rectangle" },
+      { emoji: "🧳", label: "suitcase", shape: "rectangle" },
+      { emoji: "🔋", label: "battery", shape: "rectangle" },
+      { emoji: "🏠", label: "house front", shape: "pentagon" },
+      { emoji: "🏫", label: "school front", shape: "pentagon" },
+      { emoji: "🛡️", label: "shield badge", shape: "pentagon" },
+      { emoji: "🔩", label: "metal nut", shape: "hexagon" },
+      { emoji: "⬢", label: "hexagon tile", shape: "hexagon" },
+      { emoji: "🥚", label: "egg", shape: "oval" },
+      { emoji: "🏉", label: "rugby ball", shape: "oval" },
+      { emoji: "🥭", label: "mango", shape: "oval" },
+      { emoji: "🪁", label: "kite", shape: "diamond" },
+      { emoji: "💎", label: "gem", shape: "diamond" },
+      { emoji: "🔶", label: "diamond tile", shape: "diamond" },
+      { emoji: "⭐", label: "star sticker", shape: "star" },
+      { emoji: "🌟", label: "glowing star", shape: "star" },
+      { emoji: "❤️", label: "heart", shape: "heart" },
+      { emoji: "🍓", label: "strawberry", shape: "heart" },
+      { emoji: "🛑", label: "stop sign", shape: "octagon" }
+    ];
+    const shapeNames = ["circle", "square", "triangle", "rectangle", "pentagon", "hexagon", "oval", "diamond", "star", "heart", "octagon"];
+
+    function runDataChecks() {
+      const errors = [];
+      const seenWords = new Set();
+      const seenVisuals = new Map();
+
+      words.forEach((item) => {
+        if (seenWords.has(item.word)) errors.push(`Duplicate word: ${item.word}`);
+        if (!item.word.endsWith(item.ending)) errors.push(`${item.word} does not end in ${item.ending}`);
+        if (!endingOrder.includes(item.ending)) errors.push(`Unknown ending for ${item.word}: ${item.ending}`);
+        if (!wordVisuals[item.word]) errors.push(`Missing visual for ${item.word}`);
+        if (!item.photo.trim()) errors.push(`Missing picture description for ${item.word}`);
+        if (!item.example.toLowerCase().includes(item.word)) errors.push(`Example does not include ${item.word}`);
+        if (seenVisuals.has(wordVisuals[item.word])) {
+          errors.push(`Shared visual for ${seenVisuals.get(wordVisuals[item.word])} and ${item.word}`);
+        }
+        seenWords.add(item.word);
+        seenVisuals.set(wordVisuals[item.word], item.word);
+      });
+
+      Object.keys(wordVisuals).forEach((word) => {
+        if (!seenWords.has(word)) errors.push(`Visual has no word record: ${word}`);
+      });
+
+      endingOrder.forEach((ending) => {
+        if (!words.some((item) => item.ending === ending)) errors.push(`Ending has no words: ${ending}`);
+        if (!groupColors[ending]) errors.push(`Ending has no colour: ${ending}`);
+      });
+
+      if (!weightItems.some((item) => item.heavy) || !weightItems.some((item) => !item.heavy)) {
+        errors.push("Weight objects need both heavy and light examples");
+      }
+      if (!sizeItems.some((item) => item.big) || !sizeItems.some((item) => !item.big)) {
+        errors.push("Size objects need both big and small examples");
+      }
+      shapeNames.forEach((shape) => {
+        if (!shapeObjects.some((item) => item.shape === shape)) errors.push(`Shape has no objects: ${shape}`);
+      });
+      shapeObjects.forEach((item) => {
+        if (!shapeNames.includes(item.shape)) errors.push(`Unknown shape for ${item.label}: ${item.shape}`);
+      });
+
+      if (errors.length > 0) throw new Error(`Content checks failed:\n${errors.join("\n")}`);
+      return {
+        words: words.length,
+        endings: endingOrder.length,
+        weightObjects: weightItems.length,
+        sizeObjects: sizeItems.length,
+        shapeObjects: shapeObjects.length
+      };
+    }
+
+    window.runDataChecks = runDataChecks;
+    const lastPicked = {};
+    const sizeObjectQueues = { big: [], small: [] };
+    const previousSizeObjects = { big: null, small: null };
+    let shapeObjectQueue = [];
+    let previousShapeObject = null;
+
+    const chooseState = {
+      weight: { stage: elements.weightStage, prompt: elements.weightPrompt, feedback: elements.weightFeedback, object: null },
+      size: { stage: elements.sizeStage, prompt: elements.sizePrompt, feedback: elements.sizeFeedback, object: null },
+      shapes: { stage: elements.shapesStage, prompt: elements.shapesPrompt, feedback: elements.shapesFeedback, object: elements.shapesObject }
+    };
+
+    function buildChoosePuzzle(kind) {
+      if (kind === "weight") {
+        const wantHeavy = Math.random() < 0.5;
+        const heavy = weightItems.filter((item) => item.heavy);
+        const light = weightItems.filter((item) => !item.heavy);
+        const correct = { ...pickFresh(wantHeavy ? heavy : light, "weightCorrect"), correct: true };
+        const distractor = { ...pickFresh(wantHeavy ? light : heavy, "weightDistractor"), correct: false };
+        return {
+          promptText: wantHeavy ? "Tap the heavier one" : "Tap the lighter one",
+          cards: shuffle([correct, distractor]),
+          render: renderEmojiCard
+        };
+      }
+
+      if (kind === "size") {
+        const wantBig = Math.random() < 0.5;
+        const correct = { ...nextSizeObject(wantBig), correct: true };
+        const distractor = { ...nextSizeObject(!wantBig), correct: false };
+        return {
+          promptText: wantBig ? "Tap the bigger one" : "Tap the smaller one",
+          cards: shuffle([correct, distractor]),
+          render: renderEmojiCard
+        };
+      }
+
+      const object = nextShapeObject();
+      const others = shuffle(shapeNames.filter((name) => name !== object.shape)).slice(0, 3);
+      const cards = shuffle([
+        { label: object.shape, correct: true },
+        ...others.map((label) => ({ label, correct: false }))
+      ]);
+      return {
+        promptText: "What shape is this?",
+        display: object,
+        cards,
+        render: renderShapeNameCard
+      };
+    }
+
+    function pickOne(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function pickFresh(list, key) {
+      if (list.length < 2) return list[0];
+      let choice = pickOne(list);
+      while (choice === lastPicked[key]) choice = pickOne(list);
+      lastPicked[key] = choice;
+      return choice;
+    }
+
+    function nextSizeObject(isBig) {
+      const queueKey = isBig ? "big" : "small";
+      const items = sizeItems.filter((item) => item.big === isBig);
+      const queue = sizeObjectQueues[queueKey];
+
+      if (queue.length === 0) {
+        queue.push(...shuffle(items));
+        if (queue[0] === previousSizeObjects[queueKey]) {
+          [queue[0], queue[1]] = [queue[1], queue[0]];
+        }
+      }
+
+      previousSizeObjects[queueKey] = queue.shift();
+      return previousSizeObjects[queueKey];
+    }
+
+    function nextShapeObject() {
+      if (shapeObjectQueue.length === 0) {
+        shapeObjectQueue = shuffle([...shapeObjects]);
+        if (shapeObjectQueue[0] === previousShapeObject) {
+          [shapeObjectQueue[0], shapeObjectQueue[1]] = [shapeObjectQueue[1], shapeObjectQueue[0]];
+        }
+      }
+
+      previousShapeObject = shapeObjectQueue.shift();
+      return previousShapeObject;
+    }
+
+    function renderEmojiCard(card) {
+      const emoji = document.createElement("span");
+      emoji.className = "choose-emoji";
+      emoji.textContent = card.emoji;
+      const label = document.createElement("span");
+      label.className = "choose-label";
+      label.textContent = card.label;
+      const button = baseCard(card, card.label);
+      button.append(emoji, label);
+      return button;
+    }
+
+    function renderShapeNameCard(card) {
+      const name = document.createElement("span");
+      name.className = "shape-name";
+      name.textContent = card.label;
+      const button = baseCard(card, card.label);
+      button.classList.add("is-name");
+      button.append(name);
+      return button;
+    }
+
+    function baseCard(card, label) {
+      const button = document.createElement("button");
+      button.className = "choose-card";
+      button.type = "button";
+      button.setAttribute("aria-label", label);
+      return button;
+    }
+
+    function renderChoosePuzzle(kind) {
+      const state = chooseState[kind];
+      const puzzle = buildChoosePuzzle(kind);
+      state.prompt.textContent = puzzle.promptText;
+      state.feedback.textContent = "";
+      state.feedback.className = "choose-feedback";
+      if (state.object) {
+        if (puzzle.display) {
+          state.object.textContent = puzzle.display.emoji;
+          state.object.setAttribute("aria-label", `A ${puzzle.display.label}`);
+        } else {
+          state.object.replaceChildren();
+        }
+      }
+      state.stage.replaceChildren();
+
+      puzzle.cards.forEach((card) => {
+        const button = puzzle.render(card);
+        button.addEventListener("click", () => {
+          if (card.correct) {
+            button.classList.add("correct");
+            state.feedback.textContent = "Well done! 🎉";
+            state.feedback.className = "choose-feedback good";
+            state.stage.querySelectorAll(".choose-card").forEach((node) => { node.disabled = true; });
+          } else {
+            button.classList.add("wrong");
+            button.disabled = true;
+            state.feedback.textContent = "Try again!";
+            state.feedback.className = "choose-feedback try";
+          }
+        });
+        state.stage.append(button);
+      });
+    }
+
+    const QUIZ_LENGTH = 10;
+    const QUIZ_TYPES = ["picture", "ending", "number", "weight", "size", "shapes"];
+    let quizQuestions = [];
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+    let quizShowingSummary = false;
+
+    function takeRandom(items, count) {
+      return shuffle([...items]).slice(0, count);
+    }
+
+    function createNumberChoices(answer) {
+      const choices = new Set([answer]);
+      const offsets = shuffle([-10, -5, -3, -2, -1, 1, 2, 3, 5, 10]);
+
+      offsets.forEach((offset) => {
+        const candidate = answer + offset;
+        if (choices.size < 4 && candidate >= 1 && candidate <= 50) choices.add(candidate);
+      });
+
+      while (choices.size < 4) choices.add(Math.floor(Math.random() * 50) + 1);
+      return shuffle([...choices]).map((number) => ({
+        label: String(number),
+        correct: number === answer
+      }));
+    }
+
+    function buildQuizQuestion(type) {
+      if (type === "picture") {
+        const item = pickOne(words);
+        const distractors = takeRandom(
+          words.filter((candidate) => candidate.word !== item.word && wordVisuals[candidate.word] !== wordVisuals[item.word]),
+          3
+        );
+        return {
+          kind: "Picture match",
+          prompt: "Which word matches this picture?",
+          clue: { text: wordVisuals[item.word], label: item.photo, className: "is-emoji" },
+          choices: shuffle([
+            { label: item.word, correct: true },
+            ...distractors.map((candidate) => ({ label: candidate.word, correct: false }))
+          ]),
+          answer: item.word
+        };
+      }
+
+      if (type === "ending") {
+        const item = pickOne(words);
+        const start = item.word.slice(0, -item.ending.length);
+        const endings = takeRandom(endingOrder.filter((ending) => ending !== item.ending), 3);
+        return {
+          kind: "Word ending",
+          prompt: "Choose the ending that completes the word.",
+          clue: { text: `${start}__`, label: `${start}, missing ending`, className: "is-word" },
+          choices: shuffle([
+            { label: `-${item.ending}`, correct: true },
+            ...endings.map((ending) => ({ label: `-${ending}`, correct: false }))
+          ]),
+          answer: `-${item.ending}`
+        };
+      }
+
+      if (type === "number") {
+        const puzzle = createNumberPuzzle(Math.random() < 0.5 ? 1 : -1);
+        const answer = puzzle.numbers[puzzle.missingIndex];
+        const sequence = puzzle.numbers
+          .map((number, index) => index === puzzle.missingIndex ? "__" : number)
+          .join("  ·  ");
+        return {
+          kind: "Missing number",
+          prompt: "Which number belongs in the gap?",
+          clue: { text: sequence, label: `Number sequence ${sequence}`, className: "is-sequence" },
+          choices: createNumberChoices(answer),
+          answer: String(answer)
+        };
+      }
+
+      const puzzle = buildChoosePuzzle(type);
+      const correct = puzzle.cards.find((card) => card.correct);
+      const clue = type === "shapes"
+        ? { text: puzzle.display.emoji, label: puzzle.display.label, className: "is-emoji" }
+        : {
+            text: type === "weight" ? "⚖️" : "↔️",
+            label: type === "weight" ? "Compare the objects by weight" : "Compare the objects by size",
+            className: "is-emoji"
+          };
+      return {
+        kind: type === "weight" ? "Heavy or light" : type === "size" ? "Big or small" : "Shape match",
+        prompt: puzzle.promptText,
+        clue,
+        choices: puzzle.cards.map((card) => ({
+          label: card.label,
+          emoji: card.emoji,
+          correct: card.correct
+        })),
+        answer: correct.label
+      };
+    }
+
+    function renderQuiz() {
+      const question = quizQuestions[quizIndex];
+      quizAnswered = false;
+      elements.quizProgress.textContent = `${quizIndex + 1} of ${quizQuestions.length}`;
+      elements.quizScore.textContent = `${quizScore} correct`;
+      elements.quizKind.textContent = question.kind;
+      elements.quizClue.className = `quiz-clue ${question.clue.className}`;
+      elements.quizClue.textContent = question.clue.text;
+      elements.quizClue.setAttribute("aria-label", question.clue.label);
+      elements.quizPrompt.textContent = question.prompt;
+      elements.quizChoices.replaceChildren();
+      elements.quizFeedback.textContent = "";
+      elements.quizFeedback.className = "quiz-feedback";
+      elements.quizNext.hidden = true;
+
+      question.choices.forEach((choice, index) => {
+        const button = document.createElement("button");
+        button.className = "quiz-choice";
+        button.type = "button";
+        button.dataset.correct = String(choice.correct);
+        button.setAttribute("aria-label", `${index + 1}. ${choice.label}`);
+
+        if (choice.emoji) {
+          const emoji = document.createElement("span");
+          emoji.className = "quiz-choice-emoji";
+          emoji.textContent = choice.emoji;
+          emoji.setAttribute("aria-hidden", "true");
+          button.append(emoji);
+        }
+
+        const label = document.createElement("span");
+        label.textContent = choice.label;
+        button.append(label);
+        button.addEventListener("click", () => answerQuiz(button, choice, question));
+        elements.quizChoices.append(button);
+      });
+    }
+
+    function answerQuiz(button, choice, question) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      elements.quizChoices.querySelectorAll(".quiz-choice").forEach((node) => {
+        node.disabled = true;
+        if (node.dataset.correct === "true") node.classList.add("correct");
+      });
+
+      if (choice.correct) {
+        quizScore += 1;
+        elements.quizFeedback.textContent = "Correct! Brilliant work. 🎉";
+        elements.quizFeedback.className = "quiz-feedback good";
+      } else {
+        button.classList.add("wrong");
+        elements.quizFeedback.textContent = `Good try — the answer is ${question.answer}.`;
+        elements.quizFeedback.className = "quiz-feedback try";
+      }
+
+      elements.quizScore.textContent = `${quizScore} correct`;
+      elements.quizNext.textContent = quizIndex === quizQuestions.length - 1 ? "See my score →" : "Next question →";
+      elements.quizNext.hidden = false;
+      elements.quizNext.focus();
+    }
+
+    function renderQuizSummary() {
+      quizShowingSummary = true;
+      const badge = quizScore === QUIZ_LENGTH ? "🏆" : quizScore >= 7 ? "🌟" : "💪";
+      const message = quizScore === QUIZ_LENGTH
+        ? "Perfect score!"
+        : quizScore >= 7
+          ? "Great work!"
+          : "Keep practising — you are learning!";
+
+      elements.quizProgress.textContent = "Complete";
+      elements.quizKind.textContent = "Quiz complete";
+      elements.quizClue.className = "quiz-clue is-emoji";
+      elements.quizClue.textContent = badge;
+      elements.quizClue.setAttribute("aria-label", message);
+      elements.quizPrompt.textContent = `You answered ${quizScore} of ${QUIZ_LENGTH} questions correctly.`;
+      elements.quizChoices.replaceChildren();
+      elements.quizFeedback.textContent = message;
+      elements.quizFeedback.className = "quiz-feedback good";
+      elements.quizNext.textContent = "Try another quiz ↻";
+      elements.quizNext.hidden = false;
+    }
+
+    function moveQuiz() {
+      if (quizShowingSummary) {
+        startQuiz();
+        return;
+      }
+      if (quizIndex === quizQuestions.length - 1) {
+        renderQuizSummary();
+        return;
+      }
+      quizIndex += 1;
+      renderQuiz();
+    }
+
+    function startQuiz() {
+      const types = [];
+      while (types.length < QUIZ_LENGTH) types.push(...shuffle([...QUIZ_TYPES]));
+      quizQuestions = types.slice(0, QUIZ_LENGTH).map(buildQuizQuestion);
+      quizIndex = 0;
+      quizScore = 0;
+      quizShowingSummary = false;
+      renderQuiz();
+    }
+
+    function createGroupButtons() {
+      endingOrder.forEach((ending) => {
+        const count = words.filter((item) => item.ending === ending).length;
+        const button = document.createElement("button");
+        button.className = "group-button";
+        button.type = "button";
+        button.dataset.ending = ending;
+        button.textContent = `-${ending}`;
+        button.title = `${count} words ending in ${ending}`;
+        button.addEventListener("click", () => {
+          currentIndex = words.findIndex((item) => item.ending === ending);
+          render();
+        });
+        elements.groups.append(button);
+      });
+    }
+
+    let revisionWords = [...words];
+    let revisionIndex = 0;
+
+    function mixRevisionWords() {
+      for (let index = revisionWords.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [revisionWords[index], revisionWords[randomIndex]] = [revisionWords[randomIndex], revisionWords[index]];
+      }
+      revisionIndex = 0;
+      renderRevision();
+    }
+
+    function renderRevision() {
+      const item = revisionWords[revisionIndex];
+      const start = item.word.slice(0, -item.ending.length);
+      elements.revisionWord.style.setProperty("--ending-color", groupColors[item.ending]);
+      elements.revisionWord.innerHTML = `${start}<span class="revision-ending">${item.ending}</span>`;
+      elements.revisionProgress.textContent = `${revisionIndex + 1} of ${revisionWords.length}`;
+    }
+
+    function moveRevision(amount) {
+      revisionIndex = (revisionIndex + amount + revisionWords.length) % revisionWords.length;
+      renderRevision();
+    }
+
+    function fitLessonWord() {
+      elements.word.style.removeProperty("font-size");
+      const maximumSize = Number.parseFloat(getComputedStyle(elements.word).fontSize);
+      let low = 64;
+      let high = maximumSize;
+
+      while (high - low > 1) {
+        const size = (low + high) / 2;
+        elements.word.style.fontSize = `${size}px`;
+        if (elements.word.scrollWidth <= elements.word.clientWidth) low = size;
+        else high = size;
+      }
+
+      elements.word.style.fontSize = `${Math.floor(low)}px`;
+    }
+
+    function render() {
+      const item = words[currentIndex];
+      const start = item.word.slice(0, -item.ending.length);
+      const color = groupColors[item.ending];
+
+      document.documentElement.style.setProperty("--coral", color);
+      elements.word.innerHTML = `<span class="word-start">${start}</span><span class="word-ending">${item.ending}</span>`;
+      fitLessonWord();
+      elements.familyLabel.textContent = `-${item.ending} family`;
+      elements.soundLine.textContent = `ends with /${item.ending}/`;
+      elements.example.textContent = item.example;
+      elements.progressLabel.textContent = `${currentIndex + 1} of ${words.length}`;
+      elements.progressFill.style.width = `${((currentIndex + 1) / words.length) * 100}%`;
+
+      document.querySelectorAll(".group-button").forEach((button) => {
+        const active = button.dataset.ending === item.ending;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-current", active ? "true" : "false");
+      });
+
+      elements.visualIcon.textContent = wordVisuals[item.word];
+      elements.visualLabel.textContent = `Picture clue: ${item.photo}`;
+      elements.visual.setAttribute("aria-label", `Picture cue for ${item.word}: ${item.photo}`);
+    }
+
+    function move(amount) {
+      currentIndex = (currentIndex + amount + words.length) % words.length;
+      render();
+    }
+
+    function speak() {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(words[currentIndex].word);
+      utterance.lang = "en-GB";
+      utterance.rate = 0.72;
+      utterance.pitch = 1.08;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    let activeTab = "english";
+
+    const tabConfig = {
+      english: { tab: elements.tabEnglish, panel: elements.panelEnglish },
+      words: { tab: elements.tabWords, panel: elements.panelWords },
+      numbers: { tab: elements.tabNumbers, panel: elements.panelNumbers },
+      weight: { tab: elements.tabWeight, panel: elements.panelWeight },
+      size: { tab: elements.tabSize, panel: elements.panelSize },
+      shapes: { tab: elements.tabShapes, panel: elements.panelShapes },
+      quiz: { tab: elements.tabQuiz, panel: elements.panelQuiz }
+    };
+
+    function switchTab(tab) {
+      activeTab = tab;
+      Object.entries(tabConfig).forEach(([name, { tab: button, panel }]) => {
+        const active = name === tab;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+        panel.classList.toggle("is-hidden", !active);
+        panel.hidden = !active;
+      });
+      if (tab === "words") fitLessonWord();
+      if (tab === "english") window.englishLearning?.activate();
+      else if (tab === "words") elements.progressLabel.textContent = `${currentIndex + 1} of ${words.length}`;
+      else elements.progressLabel.textContent = "Choose an activity";
+    }
+
+    elements.previousButton.addEventListener("click", () => move(-1));
+    elements.nextButton.addEventListener("click", () => move(1));
+    elements.speakButton.addEventListener("click", speak);
+    elements.reshuffleButton.addEventListener("click", mixRevisionWords);
+    elements.numbersRefresh.addEventListener("click", generateNumberPuzzles);
+    elements.numbersPreviousButton.addEventListener("click", () => moveNumber(-1));
+    elements.numbersNextButton.addEventListener("click", () => moveNumber(1));
+    elements.tabEnglish.addEventListener("click", () => switchTab("english"));
+    elements.tabWords.addEventListener("click", () => switchTab("words"));
+    elements.tabNumbers.addEventListener("click", () => switchTab("numbers"));
+    elements.tabWeight.addEventListener("click", () => switchTab("weight"));
+    elements.tabSize.addEventListener("click", () => switchTab("size"));
+    elements.tabShapes.addEventListener("click", () => switchTab("shapes"));
+    elements.tabQuiz.addEventListener("click", () => switchTab("quiz"));
+    elements.weightRefresh.addEventListener("click", () => renderChoosePuzzle("weight"));
+    elements.sizeRefresh.addEventListener("click", () => renderChoosePuzzle("size"));
+    elements.shapesRefresh.addEventListener("click", () => renderChoosePuzzle("shapes"));
+    elements.quizRestart.addEventListener("click", startQuiz);
+    elements.quizNext.addEventListener("click", moveQuiz);
+    elements.revisionPreviousButton.addEventListener("click", () => moveRevision(-1));
+    elements.revisionNextButton.addEventListener("click", () => moveRevision(1));
+    elements.shuffleButton.addEventListener("click", () => {
+      let nextIndex = currentIndex;
+      while (nextIndex === currentIndex) nextIndex = Math.floor(Math.random() * words.length);
+      currentIndex = nextIndex;
+      render();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (activeTab === "words") {
+        if (event.key === "ArrowLeft") move(-1);
+        if (event.key === "ArrowRight") move(1);
+        if (event.code === "Space" && event.target === document.body) {
+          event.preventDefault();
+          speak();
+        }
+      } else if (activeTab === "numbers") {
+        if (event.key === "ArrowLeft") moveNumber(-1);
+        if (event.key === "ArrowRight") moveNumber(1);
+      } else if (activeTab === "quiz" && !quizAnswered && /^[1-4]$/.test(event.key)) {
+        elements.quizChoices.querySelector(`.quiz-choice:nth-child(${event.key})`)?.click();
+      }
+    });
+
+    window.addEventListener("resize", fitLessonWord);
+    document.fonts?.ready.then(fitLessonWord);
+
+    runDataChecks();
+    createGroupButtons();
+    render();
+    mixRevisionWords();
+    generateNumberPuzzles();
+    renderChoosePuzzle("weight");
+    renderChoosePuzzle("size");
+    renderChoosePuzzle("shapes");
+    startQuiz();
+    switchTab("english");
+  </script>
+</body>
+</html>
