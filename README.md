@@ -2,6 +2,11 @@
 
 Live app: <https://vinayvinkumar.github.io/raghav-learning/>
 
+On iPhone or iPad, open the live app in Safari, select **Share**, choose
+**Add to Home Screen**, and confirm **Add**. The installed app opens in its own
+window and keeps the core learning activities available after they have loaded
+once online.
+
 The dependency-free learning app and worksheet library from the original DPS
 folder are consolidated here. The English Sound Adventure turns the reference
 pages in `english/` into interactive long-vowel, `ck` word-family, sentence,
