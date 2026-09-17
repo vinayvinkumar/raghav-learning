@@ -160,6 +160,104 @@
       ])
     },
     {
+      id: "oo-short",
+      pattern: "oo",
+      topic: "digraphs",
+      title: "Short OO",
+      sound: "the short sound in book",
+      pickerLabel: "Short sound",
+      sample: "book",
+      tip: "Keep the sound short, like the oo you hear in book and foot.",
+      color: "#e05d72",
+      words: makeWords("oo", [
+        ["book", "📕", "I read a good book."],
+        ["cook", "🧑‍🍳", "The cook makes hot food."],
+        ["hook", "🪝", "Hang the bag on the hook."],
+        ["look", "👀", "Look at the moon."],
+        ["nook", "📚", "Minu reads in a quiet nook."],
+        ["wood", "🪵", "The chair is made of wood."],
+        ["good", "👍", "This food tastes good."],
+        ["hood", "🧥", "My jacket has a hood."],
+        ["foot", "🦶", "My left foot is wet."],
+        ["wool", "🧶", "The warm cap is made of wool."]
+      ])
+    },
+    {
+      id: "oo-long",
+      pattern: "oo",
+      topic: "digraphs",
+      title: "Long OO",
+      sound: "the long sound in moon",
+      pickerLabel: "Long sound",
+      sample: "moon",
+      tip: "Stretch the sound, like the oo you hear in moon and food.",
+      color: "#6559d9",
+      words: makeWords("oo", [
+        ["cool", "😎", "The water feels cool."],
+        ["loop", "➰", "Tie the ribbon in a loop."],
+        ["hoop", "⭕", "She spins a hoop."],
+        ["food", "🍲", "Tom ate hot food."],
+        ["roof", "🏠", "The cat sits on the roof."],
+        ["room", "🛏️", "My room is neat."],
+        ["zoom", "🏎️", "The red car can zoom."],
+        ["root", "🌱", "The root grows under the soil."],
+        ["shoot", "🏀", "Shoot the ball into the hoop."]
+      ])
+    },
+    {
+      id: "oi",
+      topic: "digraphs",
+      title: "OI Digraph",
+      sound: "oy as in coin",
+      sample: "coin",
+      tip: "We usually find oi inside a word, like coin and point.",
+      color: "#158d76",
+      words: makeWords("oi", [
+        ["oil", "🛢️", "Oil floats on water."],
+        ["boil", "♨️", "Boil the water in a pot."],
+        ["coil", "🌀", "The rope is in a coil."],
+        ["soil", "🪴", "The seed grows in the soil."],
+        ["toil", "💪", "We toil together to finish the job."],
+        ["oink", "🐷", "The pig says oink."],
+        ["coin", "🪙", "The boy can toss a coin."],
+        ["join", "🧩", "Come and join our game."],
+        ["point", "👉", "Point to the red star."]
+      ])
+    },
+    {
+      id: "oy",
+      topic: "digraphs",
+      title: "OY Digraph",
+      sound: "oy as in boy",
+      sample: "boy",
+      tip: "We usually find oy at the end of a word, like boy and toy.",
+      color: "#d67a24",
+      words: makeWords("oy", [
+        ["boy", "👦", "The boy can toss a coin."],
+        ["toy", "🧸", "This is my favourite toy."],
+        ["joy", "😊", "The surprise filled us with joy."],
+        ["enjoy", "🎉", "We enjoy playing together."],
+        ["convoy", "🚚", "A convoy of trucks drove past."]
+      ])
+    },
+    {
+      id: "ou",
+      topic: "digraphs",
+      title: "OU Digraph",
+      sound: "ow as in out",
+      sample: "out",
+      tip: "Open your mouth for the /ow/ sound in out, loud, and mouth.",
+      color: "#3786c8",
+      words: makeWords("ou", [
+        ["out", "🚪", "Please come out to play."],
+        ["loud", "📢", "The drum makes a loud sound."],
+        ["mouth", "👄", "Open your mouth wide."],
+        ["sound", "🔊", "I heard a funny sound."],
+        ["round", "⭕", "The coin is round."],
+        ["pouch", "👝", "The coin is in the pouch."]
+      ])
+    },
+    {
       id: "ack",
       topic: "ck",
       title: "CK Family",
@@ -235,6 +333,11 @@
     { id: "vowels-3", category: "vowels", text: "The horn on the bus says ‘Beep, beep’.", targets: ["beep"], emoji: "🚌📣" },
     { id: "vowels-4", category: "vowels", text: "The peas are in a pod.", targets: ["peas"], emoji: "🫛" },
     { id: "vowels-5", category: "vowels", text: "It is time for our meal.", targets: ["meal"], emoji: "👨‍👩‍👦🍲" },
+    { id: "digraphs-1", category: "digraphs", text: "Minu sat in a nook with a cook book.", targets: ["nook", "cook", "book"], emoji: "👧📚" },
+    { id: "digraphs-2", category: "digraphs", text: "Sita went up to the roof to see the moon.", targets: ["roof", "moon"], emoji: "🏠🌙" },
+    { id: "digraphs-3", category: "digraphs", text: "The boy can toss a coin.", targets: ["boy", "coin"], emoji: "👦🪙" },
+    { id: "digraphs-4", category: "digraphs", text: "The book fell with a loud sound.", targets: ["book", "loud", "sound"], emoji: "📕💥" },
+    { id: "digraphs-5", category: "digraphs", text: "Tom ate hot food in his room.", targets: ["food", "room"], emoji: "👦🍲" },
     { id: "ck-1", category: "ck", text: "The sack is full of toys.", targets: ["sack"], emoji: "🧸🪀" },
     { id: "ck-2", category: "ck", text: "The deck is wet.", targets: ["deck"], emoji: "🛳️💧" },
     { id: "ck-3", category: "ck", text: "Rick went to pick a ball.", targets: ["Rick", "pick"], emoji: "🧒🏀" },
@@ -266,9 +369,12 @@
   ];
 
   const topics = [
-    { id: "vowels", label: "🌈 Long vowel sounds", description: "Two letters can team up to make one long vowel sound." },
-    { id: "ck", label: "🚀 CK word families", description: "Read words that end with the strong /k/ sound." }
+    { id: "vowels", label: "🌈 Long vowel sounds", readLabel: "🌈 Long vowels", description: "Two letters can team up to make one long vowel sound." },
+    { id: "digraphs", label: "🧩 Vowel digraphs", readLabel: "🧩 Vowel digraphs", description: "Explore short and long oo, then practise the oi, oy, and ou letter teams." },
+    { id: "ck", label: "🚀 CK word families", readLabel: "🚀 CK families", description: "Read words that end with the strong /k/ sound." }
   ];
+
+  const groupPattern = (group) => group.pattern || group.id;
 
   const allWords = soundGroups.flatMap((group) => group.words.map((item) => ({ ...item, group })));
   const groupById = new Map(soundGroups.map((group) => [group.id, group]));
@@ -414,7 +520,7 @@
     const word = item.word;
     const matchIndex = word.toLowerCase().indexOf(item.pattern.toLowerCase());
     const wrapper = createElement("p", className);
-    wrapper.style.setProperty("--group-color", item.group?.color ?? groupById.get(item.pattern)?.color ?? "#ee5675");
+    wrapper.style.setProperty("--group-color", item.group?.color ?? soundGroups.find((group) => groupPattern(group) === item.pattern)?.color ?? "#ee5675");
     if (matchIndex < 0) {
       wrapper.textContent = word;
     } else {
@@ -498,8 +604,8 @@
       button.style.setProperty("--group-color", group.color);
       button.classList.toggle("is-active", state.groupId === group.id);
       button.setAttribute("aria-pressed", state.groupId === group.id ? "true" : "false");
-      button.append(createElement("strong", "", group.id));
-      button.append(createElement("small", "", `${group.words.length} words`));
+      button.append(createElement("strong", "", groupPattern(group)));
+      button.append(createElement("small", "", group.pickerLabel ? `${group.pickerLabel} · ${group.words.length} words` : `${group.words.length} words`));
       soundPicker.append(button);
     });
     container.append(soundPicker);
@@ -510,7 +616,7 @@
     const item = group.words[state.wordIndex % group.words.length];
     const card = createElement("section", "english-stage-card");
     card.style.setProperty("--group-color", group.color);
-    card.append(createStageHeader("Step 1 · Learn", `Meet the “${group.id}” sound`, `Look, listen, and say each ${group.title.toLowerCase()} word aloud.`, `${state.wordIndex + 1} of ${group.words.length}`));
+    card.append(createStageHeader("Step 1 · Learn", `Meet ${group.title}: “${groupPattern(group)}”`, `Look, listen, and say each word aloud.`, `${state.wordIndex + 1} of ${group.words.length}`));
     appendCurriculumPickers(card, renderLearn);
 
     const layout = createElement("div", "english-learn-layout");
@@ -521,9 +627,20 @@
     picture.append(createElement("span", "english-picture-emoji", item.emoji));
 
     const copy = createElement("div", "english-word-copy");
-    copy.append(createElement("p", "english-pattern-label", `${group.title} · “${group.id}” says ${group.sound}`));
+    copy.append(createElement("p", "english-pattern-label", `${group.title} · “${groupPattern(group)}” says ${group.sound}`));
     const wordElement = appendHighlightedWord(copy, { ...item, group });
     copy.append(createElement("p", "english-example-sentence", item.sentence));
+
+    if (group.tip) {
+      const soundClue = createElement("aside", "english-sound-clue");
+      soundClue.append(createElement("span", "english-sound-clue-icon", "👂"));
+      const clueCopy = createElement("div");
+      clueCopy.append(createElement("strong", "", "Sound clue"));
+      clueCopy.append(createElement("p", "", group.tip));
+      soundClue.append(clueCopy);
+      soundClue.append(createButton("english-sound-clue-button", `Hear “${group.sample}”`, () => speakText(group.sample, 0.62)));
+      copy.append(soundClue);
+    }
 
     const actions = createElement("div", "english-card-actions");
     actions.append(createButton("english-secondary-button", "🔊 Hear word", () => speakText(item.word, 0.65)));
@@ -539,7 +656,10 @@
     wordCard.append(picture, copy);
 
     const bank = createElement("aside", "english-word-bank");
-    bank.append(createElement("h4", "", `More “${group.id}” words`));
+    const wordBankLabel = group.pickerLabel
+      ? `${group.pickerLabel.replace(/ sound$/i, "").toLowerCase()} “${groupPattern(group)}”`
+      : `“${groupPattern(group)}”`;
+    bank.append(createElement("h4", "", `More ${wordBankLabel} words`));
     bank.append(createElement("p", "", "Tap one to change the big word."));
     const wordGrid = createElement("div", "english-word-grid");
     group.words.forEach((wordItem, index) => {
@@ -592,7 +712,7 @@
   }
 
   function createPatternChoices(target) {
-    const otherPatterns = soundGroups.map((group) => group.id).filter((pattern) => pattern !== target.pattern);
+    const otherPatterns = [...new Set(soundGroups.map(groupPattern))].filter((pattern) => pattern !== target.pattern);
     return shuffle([target.pattern, ...uniqueRandom(otherPatterns, 3)]);
   }
 
@@ -726,7 +846,7 @@
     if (!state.practice || state.practice.groupId !== group.id) state.practice = createPracticeSession(group);
     const session = state.practice;
     const card = createElement("section", "english-stage-card");
-    card.append(createStageHeader("Step 2 · Practise", `Play with “${group.id}” words`, "Pictures, missing sounds, listening, and sentences help the words stick.", session.finished ? "Finished!" : `${session.index + 1} of ${PRACTICE_LENGTH}`));
+    card.append(createStageHeader("Step 2 · Practise", `Play with ${group.title}: “${groupPattern(group)}”`, "Pictures, missing sounds, listening, and sentences help the words stick.", session.finished ? "Finished!" : `${session.index + 1} of ${PRACTICE_LENGTH}`));
     appendCurriculumPickers(card, renderPractice);
 
     if (session.finished) {
@@ -763,7 +883,7 @@
     card.append(createStageHeader("Step 3 · Read", "Read a whole sentence", "Point to each word, read slowly, then listen to check yourself.", `${state.readingIndex + 1} of ${sentences.length}`));
 
     const filters = createElement("div", "english-reading-filter");
-    [["vowels", "🌈 Long vowels"], ["ck", "🚀 CK families"]].forEach(([category, label]) => {
+    topics.forEach(({ id: category, readLabel: label }) => {
       const button = createButton("", label, () => {
         state.readingCategory = category;
         state.readingIndex = 0;
@@ -990,7 +1110,7 @@
 
     const focus = createElement("article", "english-revision-card");
     focus.style.setProperty("--group-color", item.group.color);
-    focus.append(createElement("p", "english-revision-pattern", `${item.group.title} · “${item.pattern}” says ${item.group.sound}`));
+    focus.append(createElement("p", "english-revision-pattern", `${item.group.title} · “${groupPattern(item.group)}” says ${item.group.sound}`));
     const wordElement = appendHighlightedWord(focus, item, "english-revision-word");
     focus.append(createElement("p", "english-revision-sentence", item.sentence));
 
@@ -1047,17 +1167,22 @@
   function runDataChecks() {
     const errors = [];
     const seenIds = new Set();
+    const seenGroupIds = new Set();
     soundGroups.forEach((group) => {
+      if (seenGroupIds.has(group.id)) errors.push(`Duplicate English sound group: ${group.id}`);
       if (!topics.some((topic) => topic.id === group.topic)) errors.push(`Unknown topic for ${group.id}`);
       if (group.words.length < 3) errors.push(`${group.id} needs at least three words`);
       group.words.forEach((item) => {
         if (seenIds.has(item.id)) errors.push(`Duplicate English word: ${item.id}`);
+        if (item.pattern !== groupPattern(group)) errors.push(`${item.word} has the wrong pattern for ${group.id}`);
         if (!item.word.includes(item.pattern)) errors.push(`${item.word} does not contain ${item.pattern}`);
         if (!item.sentence.toLowerCase().includes(item.word.toLowerCase())) errors.push(`Sentence does not include ${item.word}`);
         seenIds.add(item.id);
       });
+      seenGroupIds.add(group.id);
     });
     readingSentences.forEach((sentence) => {
+      if (!topics.some((topic) => topic.id === sentence.category)) errors.push(`Unknown reading category for ${sentence.id}`);
       sentence.targets.forEach((target) => {
         if (!sentence.text.toLowerCase().includes(target.toLowerCase())) errors.push(`Reading sentence ${sentence.id} is missing ${target}`);
       });

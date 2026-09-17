@@ -380,7 +380,10 @@
 }
 
 .english-sound-button small {
+  max-width: 130px;
   font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .english-sound-button.is-active {
@@ -459,6 +462,62 @@
   background: color-mix(in srgb, var(--group-color) 11%, #fff);
   font-size: 14px;
   font-weight: 800;
+}
+
+.english-sound-clue {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  width: min(100%, 680px);
+  align-items: center;
+  gap: 13px;
+  margin: 0 0 22px;
+  padding: 13px 15px;
+  color: #4f5062;
+  border: 1px solid color-mix(in srgb, var(--group-color) 24%, #e4e4ed);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--group-color) 7%, #fff);
+  text-align: left;
+}
+
+.english-sound-clue-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  background: #fff;
+  font-size: 22px;
+}
+
+.english-sound-clue strong,
+.english-sound-clue p {
+  display: block;
+  margin: 0;
+}
+
+.english-sound-clue strong {
+  color: var(--group-color);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.english-sound-clue p {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.english-sound-clue-button {
+  min-height: 42px;
+  padding: 0 13px;
+  color: var(--group-color);
+  border: 1px solid color-mix(in srgb, var(--group-color) 28%, #dedfe8);
+  border-radius: 12px;
+  background: #fff;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .english-big-word {
@@ -1313,6 +1372,15 @@
 
   .english-word-copy {
     padding: 28px 22px;
+  }
+
+  .english-sound-clue {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .english-sound-clue-button {
+    grid-column: 1 / -1;
+    width: 100%;
   }
 
   .english-big-word {
