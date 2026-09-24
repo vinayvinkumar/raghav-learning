@@ -258,6 +258,71 @@
       ])
     },
     {
+      id: "sh-start",
+      pattern: "sh",
+      topic: "sh-ph",
+      title: "SH at the Start",
+      sound: "sh as in ship",
+      pickerLabel: "Beginning",
+      sample: "ship",
+      tip: "Put a finger near your lips and whisper shhh. Here, sh comes at the beginning of the word.",
+      color: "#d95776",
+      words: makeWords("sh", [
+        ["shed", "🏚️", "The tools are in the shed."],
+        ["ship", "🚢", "The ship sails on the sea."],
+        ["shop", "🏪", "We walk to the toy shop."],
+        ["shot", "🥅", "Raghav took a shot at the goal."],
+        ["shut", "🚪", "Please shut the door."],
+        ["shell", "🐚", "I found a shell on the beach."],
+        ["shake", "🧃", "Shake the bottle gently."],
+        ["shape", "🔺", "A star is a fun shape."],
+        ["shade", "⛱️", "We sat in the shade."],
+        ["shack", "🛖", "The small shack is near the field."],
+        ["shore", "🏖️", "The boat came back to the shore."],
+        ["short", "📏", "This pencil is short."],
+        ["shock", "😲", "The loud bang gave me a shock."],
+        ["shine", "✨", "The stars shine at night."]
+      ])
+    },
+    {
+      id: "sh-end",
+      pattern: "sh",
+      topic: "sh-ph",
+      title: "SH at the End",
+      sound: "sh as in fish",
+      pickerLabel: "Ending",
+      sample: "fish",
+      tip: "Listen for shhh at the end. The letters s and h still work together to make one sound.",
+      color: "#6559d9",
+      words: makeWords("sh", [
+        ["cash", "💵", "Dad paid with cash."],
+        ["dash", "🏃", "I made a quick dash to the gate."],
+        ["mash", "🥔", "Please mash the soft potato."],
+        ["rash", "🩹", "The doctor checked the rash."],
+        ["dish", "🍽️", "Put the fruit in the dish."],
+        ["fish", "🐟", "The fish swims in the pond."],
+        ["wish", "🌠", "Make a wish on your birthday."],
+        ["rush", "⏰", "There is no need to rush."]
+      ])
+    },
+    {
+      id: "ph",
+      topic: "sh-ph",
+      title: "PH Digraph",
+      sound: "f as in phone",
+      pickerLabel: "Sounds like F",
+      sample: "phone",
+      tip: "The letters p and h team up to make the /f/ sound, just like the first sound in phone.",
+      color: "#158d76",
+      words: makeWords("ph", [
+        ["phone", "📱", "The phone is on the table."],
+        ["photo", "🖼️", "We took a family photo."],
+        ["phonics", "🔤", "We learn phonics at school."],
+        ["phase", "🌒", "The moon is in a new phase."],
+        ["dolphin", "🐬", "The dolphin jumps over the waves."]
+      ])
+    },
+    {
       id: "ack",
       topic: "ck",
       title: "CK Family",
@@ -338,6 +403,12 @@
     { id: "digraphs-3", category: "digraphs", text: "The boy can toss a coin.", targets: ["boy", "coin"], emoji: "👦🪙" },
     { id: "digraphs-4", category: "digraphs", text: "The book fell with a loud sound.", targets: ["book", "loud", "sound"], emoji: "📕💥" },
     { id: "digraphs-5", category: "digraphs", text: "Tom ate hot food in his room.", targets: ["food", "room"], emoji: "👦🍲" },
+    { id: "sh-ph-1", category: "sh-ph", text: "The ship sailed close to the shore.", targets: ["ship", "shore"], emoji: "🚢🏖️" },
+    { id: "sh-ph-2", category: "sh-ph", text: "The shell has a bright shine.", targets: ["shell", "shine"], emoji: "🐚✨" },
+    { id: "sh-ph-3", category: "sh-ph", text: "The fish is in the dish.", targets: ["fish", "dish"], emoji: "🐟🍽️" },
+    { id: "sh-ph-4", category: "sh-ph", text: "The phone has a photo of a dolphin.", targets: ["phone", "photo", "dolphin"], emoji: "📱🐬" },
+    { id: "sh-ph-5", category: "sh-ph", text: "We learn phonics one sound at a time.", targets: ["phonics"], emoji: "🔤👂" },
+    { id: "sh-ph-6", category: "sh-ph", text: "The moon is in a new phase.", targets: ["phase"], emoji: "🌒🌙" },
     { id: "ck-1", category: "ck", text: "The sack is full of toys.", targets: ["sack"], emoji: "🧸🪀" },
     { id: "ck-2", category: "ck", text: "The deck is wet.", targets: ["deck"], emoji: "🛳️💧" },
     { id: "ck-3", category: "ck", text: "Rick went to pick a ball.", targets: ["Rick", "pick"], emoji: "🧒🏀" },
@@ -371,6 +442,7 @@
   const topics = [
     { id: "vowels", label: "🌈 Long vowel sounds", readLabel: "🌈 Long vowels", description: "Two letters can team up to make one long vowel sound." },
     { id: "digraphs", label: "🧩 Vowel digraphs", readLabel: "🧩 Vowel digraphs", description: "Explore short and long oo, then practise the oi, oy, and ou letter teams." },
+    { id: "sh-ph", label: "🐚 SH & PH digraphs", readLabel: "🐚 SH & PH", description: "Practise sh at the beginning and end of words, then learn how ph makes the /f/ sound." },
     { id: "ck", label: "🚀 CK word families", readLabel: "🚀 CK families", description: "Read words that end with the strong /k/ sound." }
   ];
 
