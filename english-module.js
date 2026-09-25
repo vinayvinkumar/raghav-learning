@@ -479,7 +479,8 @@
     articleIndex: 0,
     quiz: null,
     revisionWords: shuffle(allWords),
-    revisionIndex: 0
+    revisionIndex: 0,
+    revealedPictures: new Set()
   };
 
   let progress = loadProgress();
@@ -686,17 +687,21 @@
   function renderLearn() {
     const group = currentGroup();
     const item = group.words[state.wordIndex % group.words.length];
+    const pictureRevealed = state.revealedPictures.has(item.id);
     const card = createElement("section", "english-stage-card");
     card.style.setProperty("--group-color", group.color);
-    card.append(createStageHeader("Step 1 · Learn", `Meet ${group.title}: “${groupPattern(group)}”`, `Look, listen, and say each word aloud.`, `${state.wordIndex + 1} of ${group.words.length}`));
+    card.append(createStageHeader("Step 1 · Learn", `Meet ${group.title}: “${groupPattern(group)}”`, "Read the big word aloud first. Then reveal only this word’s picture.", `${state.wordIndex + 1} of ${group.words.length}`));
     appendCurriculumPickers(card, renderLearn);
 
     const layout = createElement("div", "english-learn-layout");
-    const wordCard = createElement("article", "english-word-card");
-    const picture = createButton("english-picture-button", "", () => speakText(item.word, 0.65));
-    picture.style.setProperty("--group-color", group.color);
-    picture.setAttribute("aria-label", `Hear the word ${item.word}`);
-    picture.append(createElement("span", "english-picture-emoji", item.emoji));
+    const wordCard = createElement("article", `english-word-card ${pictureRevealed ? "is-picture-revealed" : "is-picture-hidden"}`);
+    let picture;
+    if (pictureRevealed) {
+      picture = createButton("english-picture-button", "", () => speakText(item.word, 0.65));
+      picture.style.setProperty("--group-color", group.color);
+      picture.setAttribute("aria-label", `Picture for ${item.word}. Tap to hear the word.`);
+      picture.append(createElement("span", "english-picture-emoji", item.emoji));
+    }
 
     const copy = createElement("div", "english-word-copy");
     copy.append(createElement("p", "english-pattern-label", `${group.title} · “${groupPattern(group)}” says ${group.sound}`));
@@ -715,6 +720,12 @@
     }
 
     const actions = createElement("div", "english-card-actions");
+    if (!pictureRevealed) {
+      actions.append(createButton("english-secondary-button english-reveal-picture-button", "I read it — show picture", () => {
+        state.revealedPictures.add(item.id);
+        renderLearn();
+      }));
+    }
     actions.append(createButton("english-secondary-button", "🔊 Hear word", () => speakText(item.word, 0.65)));
     actions.append(createButton("english-secondary-button", "🗣️ Hear sentence", () => speakText(item.sentence, 0.78)));
     const learned = progress.learned.includes(item.id);
@@ -725,7 +736,8 @@
     learnedButton.disabled = learned;
     actions.append(learnedButton);
     copy.append(actions);
-    wordCard.append(picture, copy);
+    if (picture) wordCard.append(picture, copy);
+    else wordCard.append(copy);
 
     const bank = createElement("aside", "english-word-bank");
     const wordBankLabel = group.pickerLabel

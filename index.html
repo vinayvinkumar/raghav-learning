@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./english-module.css?v=20260924-1">
+  <link rel="stylesheet" href="./english-module.css?v=20260924-2">
   <style>
     :root {
       --ink: #17324d;
@@ -238,6 +238,36 @@
 
     .word-panel .speak-button {
       margin-top: 12px;
+    }
+
+    .reveal-picture-button {
+      display: flex;
+      width: 100%;
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      color: var(--blue);
+      background: #f3f1ff;
+      border: 2px solid color-mix(in srgb, var(--blue) 28%, var(--line));
+      border-radius: 11px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .reveal-picture-button[hidden],
+    .photo-panel[hidden] {
+      display: none;
+    }
+
+    .lesson-card.is-picture-hidden {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lesson-card.is-picture-hidden .word-panel {
+      min-height: 590px;
+      border-top: 0;
+      border-left: 0;
     }
 
     .family-label {
@@ -1183,6 +1213,7 @@
     .group-button:active,
     .nav-button:active,
     .shuffle-button:active,
+    .reveal-picture-button:active,
     .speak-button:active,
     .reshuffle-button:active,
     .revision-nav-button:active,
@@ -1291,8 +1322,8 @@
     <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
     <nav class="groups" id="groups" aria-label="Choose a word ending"></nav>
 
-    <section class="lesson-card" aria-live="polite">
-      <div class="photo-panel">
+    <section class="lesson-card is-picture-hidden" id="wordLessonCard" aria-live="polite">
+      <div class="photo-panel" id="wordPhotoPanel" hidden>
         <div class="word-visual" id="wordVisual" role="img">
           <span class="word-visual-icon" id="wordVisualIcon" aria-hidden="true"></span>
           <span class="word-visual-label" id="wordVisualLabel"></span>
@@ -1304,6 +1335,7 @@
         <h2 class="word" id="word"></h2>
         <p class="sound-line" id="soundLine">ends with /nd/</p>
         <p class="example" id="example"></p>
+        <button class="reveal-picture-button" id="revealPictureButton" type="button">I read it — show picture</button>
         <button class="speak-button" id="speakButton" type="button">
           <span class="speaker-icon" aria-hidden="true"></span>
           Hear the word
@@ -1427,7 +1459,7 @@
     </div>
   </main>
 
-  <script src="./english-module.js?v=20260924-1"></script>
+  <script src="./english-module.js?v=20260924-2"></script>
   <script>
     const words = [
       { word: "band", ending: "nd", photo: "music band performing", example: "The band plays music." },
@@ -1561,11 +1593,14 @@
     };
 
     let currentIndex = 0;
+    const revealedWordPictures = new Set();
 
     const elements = {
       groups: document.querySelector("#groups"),
       progressLabel: document.querySelector("#progressLabel"),
       progressFill: document.querySelector("#progressFill"),
+      lessonCard: document.querySelector("#wordLessonCard"),
+      photoPanel: document.querySelector("#wordPhotoPanel"),
       visual: document.querySelector("#wordVisual"),
       visualIcon: document.querySelector("#wordVisualIcon"),
       visualLabel: document.querySelector("#wordVisualLabel"),
@@ -1573,6 +1608,7 @@
       word: document.querySelector("#word"),
       soundLine: document.querySelector("#soundLine"),
       example: document.querySelector("#example"),
+      revealPictureButton: document.querySelector("#revealPictureButton"),
       speakButton: document.querySelector("#speakButton"),
       previousButton: document.querySelector("#previousButton"),
       nextButton: document.querySelector("#nextButton"),
@@ -2285,8 +2321,12 @@ function generateNumberPuzzles() {
       const item = words[currentIndex];
       const start = item.word.slice(0, -item.ending.length);
       const color = groupColors[item.ending];
+      const pictureRevealed = revealedWordPictures.has(item.word);
 
       document.documentElement.style.setProperty("--coral", color);
+      elements.lessonCard.classList.toggle("is-picture-hidden", !pictureRevealed);
+      elements.photoPanel.hidden = !pictureRevealed;
+      elements.revealPictureButton.hidden = pictureRevealed;
       elements.word.innerHTML = `<span class="word-start">${start}</span><span class="word-ending">${item.ending}</span>`;
       fitLessonWord();
       elements.familyLabel.textContent = `-${item.ending} family`;
@@ -2301,9 +2341,15 @@ function generateNumberPuzzles() {
         button.setAttribute("aria-current", active ? "true" : "false");
       });
 
-      elements.visualIcon.textContent = wordVisuals[item.word];
-      elements.visualLabel.textContent = `Picture clue: ${item.photo}`;
-      elements.visual.setAttribute("aria-label", `Picture cue for ${item.word}: ${item.photo}`);
+      if (pictureRevealed) {
+        elements.visualIcon.textContent = wordVisuals[item.word];
+        elements.visualLabel.textContent = `Picture clue: ${item.photo}`;
+        elements.visual.setAttribute("aria-label", `Picture cue for ${item.word}: ${item.photo}`);
+      } else {
+        elements.visualIcon.textContent = "";
+        elements.visualLabel.textContent = "";
+        elements.visual.removeAttribute("aria-label");
+      }
     }
 
     function move(amount) {
@@ -2350,6 +2396,10 @@ function generateNumberPuzzles() {
 
     elements.previousButton.addEventListener("click", () => move(-1));
     elements.nextButton.addEventListener("click", () => move(1));
+    elements.revealPictureButton.addEventListener("click", () => {
+      revealedWordPictures.add(words[currentIndex].word);
+      render();
+    });
     elements.speakButton.addEventListener("click", speak);
     elements.reshuffleButton.addEventListener("click", mixRevisionWords);
     elements.numbersRefresh.addEventListener("click", generateNumberPuzzles);

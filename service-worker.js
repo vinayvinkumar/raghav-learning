@@ -1,10 +1,10 @@
 const CACHE_PREFIX = "raghav-learning-";
-const CACHE_NAME = `${CACHE_PREFIX}shell-v3`;
+const CACHE_NAME = `${CACHE_PREFIX}shell-v4`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./english-module.css?v=20260924-1",
-  "./english-module.js?v=20260924-1",
+  "./english-module.css?v=20260924-2",
+  "./english-module.js?v=20260924-2",
   "./manifest.webmanifest",
   "./icons/app-icon.svg",
   "./icons/apple-touch-icon.png",

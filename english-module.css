@@ -420,6 +420,14 @@
   overflow: hidden;
 }
 
+.english-word-card.is-picture-hidden {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.english-word-card.is-picture-hidden .english-word-copy {
+  min-height: 430px;
+}
+
 .english-picture-button {
   position: relative;
   display: grid;
@@ -576,6 +584,14 @@
   min-height: 46px;
   padding: 0 14px;
   font-size: 14px;
+}
+
+.english-word-copy .english-card-actions .english-reveal-picture-button {
+  grid-column: 1 / -1;
+  justify-self: center;
+  color: var(--group-color);
+  border-color: color-mix(in srgb, var(--group-color) 32%, #dedfe7);
+  background: color-mix(in srgb, var(--group-color) 7%, #fff);
 }
 
 .english-primary-button,
