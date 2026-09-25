@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./english-module.css?v=20260925-1">
+  <link rel="stylesheet" href="./english-module.css?v=20260925-2">
   <style>
     :root {
       --ink: #17324d;
@@ -1294,7 +1294,7 @@
 
         <nav class="english-journey" aria-label="English learning steps">
           <button class="english-step is-active" type="button" data-english-stage="learn" aria-pressed="true">
-            <span class="english-step-number">1</span><span><strong>Learn</strong><small>Meet the sounds</small></span>
+            <span class="english-step-number">1</span><span><strong>Learn</strong><small>Sounds &amp; families</small></span>
           </button>
           <button class="english-step" type="button" data-english-stage="practice" aria-pressed="false">
             <span class="english-step-number">2</span><span><strong>Practise</strong><small>Play and remember</small></span>
@@ -1311,8 +1311,20 @@
           <button class="english-step" type="button" data-english-stage="revision" aria-pressed="false">
             <span class="english-step-number">6</span><span><strong>Revise</strong><small>Mix every word</small></span>
           </button>
-          <button class="english-step" type="button" data-english-stage="families" aria-pressed="false">
-            <span class="english-step-number">7</span><span><strong>Families</strong><small>Read ending sounds</small></span>
+        </nav>
+
+        <nav class="english-learn-sections" id="englishLearnSections" aria-label="Choose a Learn section">
+          <div class="english-learn-section-intro">
+            <p class="english-stage-kicker">Step 1 · Learn</p>
+            <strong>Choose a learning shelf</strong>
+          </div>
+          <button class="english-learn-section-button is-active" type="button" data-english-learn-section="sounds" aria-pressed="true">
+            <span class="english-learn-section-icon" aria-hidden="true">🔤</span>
+            <span><strong>Sounds &amp; Letter Teams</strong><small>Vowels, digraphs, SH, PH and CK</small></span>
+          </button>
+          <button class="english-learn-section-button" type="button" data-english-learn-section="families" aria-pressed="false">
+            <span class="english-learn-section-icon" aria-hidden="true">🧩</span>
+            <span><strong>Ending Word Families</strong><small>Build words with ND, NG, NT and more</small></span>
           </button>
         </nav>
 
@@ -1321,7 +1333,7 @@
         <section class="english-stage-card english-family-stage" id="wordFamiliesStage" aria-labelledby="wordFamiliesTitle" hidden>
           <header class="english-stage-header">
             <div>
-              <p class="english-stage-kicker">Step 7 · Word families</p>
+              <p class="english-stage-kicker">Step 1 · Learn · Ending word families</p>
               <h3 id="wordFamiliesTitle">Build words with ending sounds</h3>
               <p class="english-stage-description">Choose an ending, read the big word aloud, and reveal its picture when you are ready.</p>
             </div>
@@ -1470,7 +1482,7 @@
     </div>
   </main>
 
-  <script src="./english-module.js?v=20260925-1"></script>
+  <script src="./english-module.js?v=20260925-2"></script>
   <script>
     const words = [
       { word: "band", ending: "nd", photo: "music band performing", example: "The band plays music." },

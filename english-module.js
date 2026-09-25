@@ -458,6 +458,8 @@
     stage: document.querySelector("#englishStage"),
     familyStage: document.querySelector("#wordFamiliesStage"),
     stageButtons: [...document.querySelectorAll("[data-english-stage]")],
+    learnSections: document.querySelector("#englishLearnSections"),
+    learnSectionButtons: [...document.querySelectorAll("[data-english-learn-section]")],
     totalStars: document.querySelector("#englishTotalStars"),
     progressFill: document.querySelector("#englishProgressFill"),
     learnedStat: document.querySelector("#englishLearnedStat"),
@@ -470,6 +472,7 @@
 
   const state = {
     stage: "learn",
+    learnSection: "sounds",
     topic: "vowels",
     groupId: "ai",
     wordIndex: 0,
@@ -1230,7 +1233,14 @@
   }
 
   function renderStage() {
-    const showingFamilies = state.stage === "families";
+    const learning = state.stage === "learn";
+    const showingFamilies = learning && state.learnSection === "families";
+    elements.learnSections.hidden = !learning;
+    elements.learnSectionButtons.forEach((button) => {
+      const active = button.dataset.englishLearnSection === state.learnSection;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
     elements.stage.hidden = showingFamilies;
     elements.familyStage.hidden = !showingFamilies;
     if (showingFamilies) {
@@ -1246,6 +1256,15 @@
     else renderRevision();
   }
 
+  function setLearnSection(section, shouldScroll = false) {
+    state.learnSection = section;
+    renderStage();
+    if (shouldScroll) {
+      const target = section === "families" ? elements.familyStage : elements.stage;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
   function setStage(stage, shouldScroll = false) {
     state.stage = stage;
     elements.stageButtons.forEach((button) => {
@@ -1255,7 +1274,7 @@
     });
     renderStage();
     if (shouldScroll) {
-      const target = stage === "families" ? elements.familyStage : elements.stage;
+      const target = stage === "learn" && state.learnSection === "families" ? elements.familyStage : elements.stage;
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
@@ -1297,6 +1316,9 @@
   elements.stageButtons.forEach((button) => {
     button.addEventListener("click", () => setStage(button.dataset.englishStage, true));
   });
+  elements.learnSectionButtons.forEach((button) => {
+    button.addEventListener("click", () => setLearnSection(button.dataset.englishLearnSection, true));
+  });
   window.addEventListener("resize", () => {
     const wordElement = elements.stage.querySelector(".english-big-word, .english-revision-word");
     if (wordElement) fitEnglishWord(wordElement);
@@ -1313,7 +1335,7 @@
 
   window.runEnglishDataChecks = runDataChecks;
   function activate() {
-    if (state.stage === "families") window.wordFamiliesLearning?.activate();
+    if (state.stage === "learn" && state.learnSection === "families") window.wordFamiliesLearning?.activate();
     else updateProgress();
   }
 
