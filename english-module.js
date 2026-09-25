@@ -456,6 +456,7 @@
 
   const elements = {
     stage: document.querySelector("#englishStage"),
+    familyStage: document.querySelector("#wordFamiliesStage"),
     stageButtons: [...document.querySelectorAll("[data-english-stage]")],
     totalStars: document.querySelector("#englishTotalStars"),
     progressFill: document.querySelector("#englishProgressFill"),
@@ -1229,6 +1230,14 @@
   }
 
   function renderStage() {
+    const showingFamilies = state.stage === "families";
+    elements.stage.hidden = showingFamilies;
+    elements.familyStage.hidden = !showingFamilies;
+    if (showingFamilies) {
+      window.wordFamiliesLearning?.activate();
+      return;
+    }
+    updateProgress();
     if (state.stage === "learn") renderLearn();
     else if (state.stage === "practice") renderPractice();
     else if (state.stage === "read") renderRead();
@@ -1245,7 +1254,10 @@
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
     renderStage();
-    if (shouldScroll) elements.stage.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (shouldScroll) {
+      const target = stage === "families" ? elements.familyStage : elements.stage;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   function runDataChecks() {
@@ -1300,7 +1312,12 @@
   });
 
   window.runEnglishDataChecks = runDataChecks;
-  window.englishLearning = { activate: updateProgress, setStage };
+  function activate() {
+    if (state.stage === "families") window.wordFamiliesLearning?.activate();
+    else updateProgress();
+  }
+
+  window.englishLearning = { activate, setStage };
 
   runDataChecks();
   updateProgress();

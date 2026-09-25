@@ -8,12 +8,13 @@ window and keeps the core learning activities available after they have loaded
 once online.
 
 The dependency-free learning app and worksheet library from the original DPS
-folder are consolidated here. The English Sound Adventure turns the reference
-pages in `english/` into interactive long-vowel, `ck` word-family, sentence,
-audio, practice, A-or-An, mixed-up revision, and quiz activities. The English
-journey also covers short and long `oo`, `oi`, `oy`, and `ou` vowel digraphs
-plus beginning `sh`, ending `sh`, and `ph` consonant digraphs from the latest
-reference pages. Progress is saved in the browser.
+folder are consolidated here. One **English Lessons** tab now combines the
+English Sound Adventure and the ending-sound Word Families lesson. The journey
+turns the reference pages in `english/` into interactive long-vowel, `ck`
+word-family, sentence, audio, practice, A-or-An, mixed-up revision, and quiz
+activities. It also covers short and long `oo`, `oi`, `oy`, and `ou` vowel
+digraphs plus beginning `sh`, ending `sh`, and `ph` consonant digraphs from the
+latest reference pages. Progress is saved in the browser.
 
 ```bash
 npm run dev

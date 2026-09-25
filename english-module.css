@@ -6,7 +6,7 @@
 }
 
 .app > .tabs {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .english-shell {
@@ -243,8 +243,22 @@
 
 .english-journey {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 10px;
+}
+
+.english-family-stage {
+  display: grid;
+  min-height: 650px;
+  gap: 18px;
+}
+
+.english-family-stage[hidden] {
+  display: none;
+}
+
+.english-family-stage > .progress-track {
+  margin-bottom: 0;
 }
 
 .english-step {

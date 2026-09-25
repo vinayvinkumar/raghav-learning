@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./english-module.css?v=20260924-2">
+  <link rel="stylesheet" href="./english-module.css?v=20260925-1">
   <style>
     :root {
       --ink: #17324d;
@@ -1249,8 +1249,7 @@
     </header>
 
     <div class="tabs" role="tablist" aria-label="Choose an activity">
-      <button class="tab-button is-active" id="tabEnglish" type="button" role="tab" aria-selected="true" aria-controls="panelEnglish">English</button>
-      <button class="tab-button" id="tabWords" type="button" role="tab" aria-selected="false" aria-controls="panelWords">Word Families</button>
+      <button class="tab-button is-active" id="tabEnglish" type="button" role="tab" aria-selected="true" aria-controls="panelEnglish">English Lessons</button>
       <button class="tab-button" id="tabNumbers" type="button" role="tab" aria-selected="false" aria-controls="panelNumbers">Numbers</button>
       <button class="tab-button" id="tabWeight" type="button" role="tab" aria-selected="false" aria-controls="panelWeight">Heavy &amp; Light</button>
       <button class="tab-button" id="tabSize" type="button" role="tab" aria-selected="false" aria-controls="panelSize">Big &amp; Small</button>
@@ -1312,61 +1311,73 @@
           <button class="english-step" type="button" data-english-stage="revision" aria-pressed="false">
             <span class="english-step-number">6</span><span><strong>Revise</strong><small>Mix every word</small></span>
           </button>
+          <button class="english-step" type="button" data-english-stage="families" aria-pressed="false">
+            <span class="english-step-number">7</span><span><strong>Families</strong><small>Read ending sounds</small></span>
+          </button>
         </nav>
 
         <div class="english-stage" id="englishStage" aria-live="polite"></div>
+
+        <section class="english-stage-card english-family-stage" id="wordFamiliesStage" aria-labelledby="wordFamiliesTitle" hidden>
+          <header class="english-stage-header">
+            <div>
+              <p class="english-stage-kicker">Step 7 · Word families</p>
+              <h3 id="wordFamiliesTitle">Build words with ending sounds</h3>
+              <p class="english-stage-description">Choose an ending, read the big word aloud, and reveal its picture when you are ready.</p>
+            </div>
+            <strong class="english-stage-count" id="wordFamiliesCount">1 of 99</strong>
+          </header>
+
+          <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+          <nav class="groups" id="groups" aria-label="Choose a word ending"></nav>
+
+          <section class="lesson-card is-picture-hidden" id="wordLessonCard" aria-live="polite">
+            <div class="photo-panel" id="wordPhotoPanel" hidden>
+              <div class="word-visual" id="wordVisual" role="img">
+                <span class="word-visual-icon" id="wordVisualIcon" aria-hidden="true"></span>
+                <span class="word-visual-label" id="wordVisualLabel"></span>
+              </div>
+            </div>
+
+            <div class="word-panel">
+              <p class="family-label" id="familyLabel">-nd family</p>
+              <h2 class="word" id="word"></h2>
+              <p class="sound-line" id="soundLine">ends with /nd/</p>
+              <p class="example" id="example"></p>
+              <button class="reveal-picture-button" id="revealPictureButton" type="button">I read it — show picture</button>
+              <button class="speak-button" id="speakButton" type="button">
+                <span class="speaker-icon" aria-hidden="true"></span>
+                Hear the word
+              </button>
+            </div>
+          </section>
+
+          <div class="controls">
+            <button class="nav-button" id="previousButton" type="button" aria-label="Previous word">&#8592; Previous</button>
+            <button class="shuffle-button" id="shuffleButton" type="button" aria-label="Show a random word" title="Random word">&#8635;</button>
+            <button class="nav-button" id="nextButton" type="button" aria-label="Next word">Next &#8594;</button>
+          </div>
+          <p class="tip">Use the arrow keys to move. Press the space bar to hear the word.</p>
+
+          <section class="revision-section" aria-labelledby="revisionTitle">
+            <header class="revision-header">
+              <div>
+                <h2 class="revision-title" id="revisionTitle">Mixed-up revision</h2>
+                <p class="revision-subtitle">Read the big word, then press Next.</p>
+              </div>
+              <div class="revision-progress" id="revisionProgress">1 of 99</div>
+            </header>
+            <div class="revision-stage" aria-live="polite">
+              <p class="revision-word" id="revisionWord"></p>
+            </div>
+            <div class="revision-controls">
+              <button class="revision-nav-button" id="revisionPreviousButton" type="button">&#8592; Previous</button>
+              <button class="reshuffle-button" id="reshuffleButton" type="button" aria-label="Mix the revision words" title="Mix again">&#8635;</button>
+              <button class="revision-nav-button" id="revisionNextButton" type="button">Next &#8594;</button>
+            </div>
+          </section>
+        </section>
       </section>
-    </div>
-
-    <div class="tab-panel is-hidden" id="panelWords" role="tabpanel" aria-labelledby="tabWords" hidden>
-    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
-    <nav class="groups" id="groups" aria-label="Choose a word ending"></nav>
-
-    <section class="lesson-card is-picture-hidden" id="wordLessonCard" aria-live="polite">
-      <div class="photo-panel" id="wordPhotoPanel" hidden>
-        <div class="word-visual" id="wordVisual" role="img">
-          <span class="word-visual-icon" id="wordVisualIcon" aria-hidden="true"></span>
-          <span class="word-visual-label" id="wordVisualLabel"></span>
-        </div>
-      </div>
-
-      <div class="word-panel">
-        <p class="family-label" id="familyLabel">-nd family</p>
-        <h2 class="word" id="word"></h2>
-        <p class="sound-line" id="soundLine">ends with /nd/</p>
-        <p class="example" id="example"></p>
-        <button class="reveal-picture-button" id="revealPictureButton" type="button">I read it — show picture</button>
-        <button class="speak-button" id="speakButton" type="button">
-          <span class="speaker-icon" aria-hidden="true"></span>
-          Hear the word
-        </button>
-      </div>
-    </section>
-
-    <div class="controls">
-      <button class="nav-button" id="previousButton" type="button" aria-label="Previous word">&#8592; Previous</button>
-      <button class="shuffle-button" id="shuffleButton" type="button" aria-label="Show a random word" title="Random word">&#8635;</button>
-      <button class="nav-button" id="nextButton" type="button" aria-label="Next word">Next &#8594;</button>
-    </div>
-    <p class="tip">Use the arrow keys to move. Press the space bar to hear the word.</p>
-
-    <section class="revision-section" aria-labelledby="revisionTitle">
-      <header class="revision-header">
-        <div>
-          <h2 class="revision-title" id="revisionTitle">Mixed-up revision</h2>
-          <p class="revision-subtitle">Read the big word, then press Next.</p>
-        </div>
-        <div class="revision-progress" id="revisionProgress">1 of 99</div>
-      </header>
-      <div class="revision-stage" aria-live="polite">
-        <p class="revision-word" id="revisionWord"></p>
-      </div>
-      <div class="revision-controls">
-        <button class="revision-nav-button" id="revisionPreviousButton" type="button">&#8592; Previous</button>
-        <button class="reshuffle-button" id="reshuffleButton" type="button" aria-label="Mix the revision words" title="Mix again">&#8635;</button>
-        <button class="revision-nav-button" id="revisionNextButton" type="button">Next &#8594;</button>
-      </div>
-    </section>
     </div>
 
     <div class="tab-panel is-hidden" id="panelNumbers" role="tabpanel" aria-labelledby="tabNumbers" hidden>
@@ -1459,7 +1470,7 @@
     </div>
   </main>
 
-  <script src="./english-module.js?v=20260924-2"></script>
+  <script src="./english-module.js?v=20260925-1"></script>
   <script>
     const words = [
       { word: "band", ending: "nd", photo: "music band performing", example: "The band plays music." },
@@ -1619,10 +1630,10 @@
       revisionPreviousButton: document.querySelector("#revisionPreviousButton"),
       revisionNextButton: document.querySelector("#revisionNextButton"),
       tabEnglish: document.querySelector("#tabEnglish"),
-      tabWords: document.querySelector("#tabWords"),
       tabNumbers: document.querySelector("#tabNumbers"),
       panelEnglish: document.querySelector("#panelEnglish"),
-      panelWords: document.querySelector("#panelWords"),
+      wordFamiliesStage: document.querySelector("#wordFamiliesStage"),
+      wordFamiliesCount: document.querySelector("#wordFamiliesCount"),
       panelNumbers: document.querySelector("#panelNumbers"),
       numberPuzzle: document.querySelector("#numberPuzzle"),
       numbersProgress: document.querySelector("#numbersProgress"),
@@ -2333,6 +2344,7 @@ function generateNumberPuzzles() {
       elements.soundLine.textContent = `ends with /${item.ending}/`;
       elements.example.textContent = item.example;
       elements.progressLabel.textContent = `${currentIndex + 1} of ${words.length}`;
+      elements.wordFamiliesCount.textContent = `${currentIndex + 1} of ${words.length}`;
       elements.progressFill.style.width = `${((currentIndex + 1) / words.length) * 100}%`;
 
       document.querySelectorAll(".group-button").forEach((button) => {
@@ -2371,7 +2383,6 @@ function generateNumberPuzzles() {
 
     const tabConfig = {
       english: { tab: elements.tabEnglish, panel: elements.panelEnglish },
-      words: { tab: elements.tabWords, panel: elements.panelWords },
       numbers: { tab: elements.tabNumbers, panel: elements.panelNumbers },
       weight: { tab: elements.tabWeight, panel: elements.panelWeight },
       size: { tab: elements.tabSize, panel: elements.panelSize },
@@ -2388,9 +2399,7 @@ function generateNumberPuzzles() {
         panel.classList.toggle("is-hidden", !active);
         panel.hidden = !active;
       });
-      if (tab === "words") fitLessonWord();
       if (tab === "english") window.englishLearning?.activate();
-      else if (tab === "words") elements.progressLabel.textContent = `${currentIndex + 1} of ${words.length}`;
       else elements.progressLabel.textContent = "Choose an activity";
     }
 
@@ -2406,7 +2415,6 @@ function generateNumberPuzzles() {
     elements.numbersPreviousButton.addEventListener("click", () => moveNumber(-1));
     elements.numbersNextButton.addEventListener("click", () => moveNumber(1));
     elements.tabEnglish.addEventListener("click", () => switchTab("english"));
-    elements.tabWords.addEventListener("click", () => switchTab("words"));
     elements.tabNumbers.addEventListener("click", () => switchTab("numbers"));
     elements.tabWeight.addEventListener("click", () => switchTab("weight"));
     elements.tabSize.addEventListener("click", () => switchTab("size"));
@@ -2427,7 +2435,7 @@ function generateNumberPuzzles() {
     });
 
     document.addEventListener("keydown", (event) => {
-      if (activeTab === "words") {
+      if (activeTab === "english" && !elements.wordFamiliesStage.closest("[hidden]")) {
         if (event.key === "ArrowLeft") move(-1);
         if (event.key === "ArrowRight") move(1);
         if (event.code === "Space" && event.target === document.body) {
@@ -2444,6 +2452,14 @@ function generateNumberPuzzles() {
 
     window.addEventListener("resize", fitLessonWord);
     document.fonts?.ready.then(fitLessonWord);
+
+    window.wordFamiliesLearning = {
+      activate() {
+        elements.progressLabel.textContent = `${currentIndex + 1} of ${words.length}`;
+        elements.wordFamiliesCount.textContent = `${currentIndex + 1} of ${words.length}`;
+        fitLessonWord();
+      }
+    };
 
     runDataChecks();
     createGroupButtons();
