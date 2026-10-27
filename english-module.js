@@ -258,6 +258,23 @@
       ])
     },
     {
+      id: "ow-cow",
+      pattern: "ow",
+      topic: "digraphs",
+      title: "OW as in Cow",
+      sound: "ow as in cow",
+      pickerLabel: "Like cow",
+      sample: "cow",
+      tip: "Here, ow sounds like ou in out. It is different from the long o sound in row.",
+      color: "#d67a24",
+      words: makeWords("ow", [
+        ["cow", "🐄", "The cow eats green grass."],
+        ["owl", "🦉", "The owl is awake at night."],
+        ["fowl", "🐓", "A hen is a type of fowl."],
+        ["howl", "🐺", "The wolf can howl at night."]
+      ])
+    },
+    {
       id: "sh-start",
       pattern: "sh",
       topic: "sh-ph",
@@ -320,6 +337,83 @@
         ["phonics", "🔤", "We learn phonics at school."],
         ["phase", "🌒", "The moon is in a new phase."],
         ["dolphin", "🐬", "The dolphin jumps over the waves."]
+      ])
+    },
+    {
+      id: "ch-start",
+      pattern: "ch",
+      topic: "ch-th-wh",
+      title: "CH at the Start",
+      sound: "ch as in chick",
+      pickerLabel: "Beginning",
+      sample: "chick",
+      tip: "Say ch like the first sound in chick. The letters c and h work together at the beginning of these words.",
+      color: "#d95776",
+      words: makeWords("ch", [
+        ["chap", "👦", "The friendly chap waves hello."],
+        ["chat", "💬", "We chat with our friends."],
+        ["chin", "🙂", "My chin is below my mouth."],
+        ["chip", "🍟", "There is one chip on my plate."],
+        ["chit", "📝", "A chit is a small paper note."],
+        ["chill", "🥶", "I feel a chill in the cold air."],
+        ["chant", "🎶", "We chant a rhyme together."],
+        ["chick", "🐤", "The little chick follows the hen."],
+        ["chimp", "🐒", "The chimp climbs a tree."]
+      ])
+    },
+    {
+      id: "ch-end",
+      pattern: "ch",
+      topic: "ch-th-wh",
+      title: "CH at the End",
+      sound: "ch as in bench",
+      pickerLabel: "Ending",
+      sample: "bench",
+      tip: "Listen for ch at the end of much and bench. The same letter team can come at the beginning or end of a word.",
+      color: "#6559d9",
+      words: makeWords("ch", [
+        ["much", "📚", "There is so much to read."],
+        ["such", "🧸", "That is such a big teddy bear!"],
+        ["bunch", "🍌", "A bunch of bananas is on the table."],
+        ["lunch", "🍱", "We eat lunch at school."],
+        ["munch", "😋", "I munch a crunchy carrot."],
+        ["bench", "🪑", "We sit on the park bench."]
+      ])
+    },
+    {
+      id: "th",
+      topic: "ch-th-wh",
+      title: "TH Digraph",
+      sound: "th as in thin",
+      pickerLabel: "Start & end",
+      sample: "thin",
+      tip: "Rest your tongue gently between your teeth and blow softly. Listen for th at the start of thin and at the end of moth.",
+      color: "#158d76",
+      words: makeWords("th", [
+        ["thin", "📏", "This ribbon is thin."],
+        ["thick", "📕", "This book is thick."],
+        ["thud", "📦💥", "The box fell with a thud."],
+        ["thank", "🙏", "I thank you for your help."],
+        ["think", "🤔", "I think before I answer."],
+        ["moth", "🦋", "A moth flies near the lamp."],
+        ["math", "🧮", "We count and add in math."]
+      ])
+    },
+    {
+      id: "wh",
+      topic: "ch-th-wh",
+      title: "WH Digraph",
+      sound: "w as in wheel",
+      pickerLabel: "Like wheel",
+      sample: "wheel",
+      tip: "In these words, wh sounds like w in wheel and whale. Keep the letters w and h together when you read.",
+      color: "#3786c8",
+      words: makeWords("wh", [
+        ["whip", "🥣🥄", "We whip the cream in a bowl."],
+        ["wheel", "🛞", "The wheel turns as we ride."],
+        ["whale", "🐋", "The whale swims in the sea."],
+        ["wheat", "🌾", "The wheat grows in the field."],
+        ["while", "📖🎵", "I sing while I read."]
       ])
     },
     {
@@ -403,12 +497,20 @@
     { id: "digraphs-3", category: "digraphs", text: "The boy can toss a coin.", targets: ["boy", "coin"], emoji: "👦🪙" },
     { id: "digraphs-4", category: "digraphs", text: "The book fell with a loud sound.", targets: ["book", "loud", "sound"], emoji: "📕💥" },
     { id: "digraphs-5", category: "digraphs", text: "Tom ate hot food in his room.", targets: ["food", "room"], emoji: "👦🍲" },
+    { id: "digraphs-6", category: "digraphs", text: "A cow and a fowl live on the farm.", targets: ["cow", "fowl"], emoji: "🐄🐓" },
+    { id: "digraphs-7", category: "digraphs", text: "The owl heard a wolf howl.", targets: ["owl", "howl"], emoji: "🦉🐺" },
     { id: "sh-ph-1", category: "sh-ph", text: "The ship sailed close to the shore.", targets: ["ship", "shore"], emoji: "🚢🏖️" },
     { id: "sh-ph-2", category: "sh-ph", text: "The shell has a bright shine.", targets: ["shell", "shine"], emoji: "🐚✨" },
     { id: "sh-ph-3", category: "sh-ph", text: "The fish is in the dish.", targets: ["fish", "dish"], emoji: "🐟🍽️" },
     { id: "sh-ph-4", category: "sh-ph", text: "The phone has a photo of a dolphin.", targets: ["phone", "photo", "dolphin"], emoji: "📱🐬" },
     { id: "sh-ph-5", category: "sh-ph", text: "We learn phonics one sound at a time.", targets: ["phonics"], emoji: "🔤👂" },
     { id: "sh-ph-6", category: "sh-ph", text: "The moon is in a new phase.", targets: ["phase"], emoji: "🌒🌙" },
+    { id: "ch-th-wh-1", category: "ch-th-wh", text: "The chick sat on a bench.", targets: ["chick", "bench"], emoji: "🐤🪑" },
+    { id: "ch-th-wh-2", category: "ch-th-wh", text: "The chimp ate lunch.", targets: ["chimp", "lunch"], emoji: "🐒🍱" },
+    { id: "ch-th-wh-3", category: "ch-th-wh", text: "I think the moth has thin wings.", targets: ["think", "moth", "thin"], emoji: "🤔🦋" },
+    { id: "ch-th-wh-4", category: "ch-th-wh", text: "Thank you for helping me with math.", targets: ["Thank", "math"], emoji: "🙏🧮" },
+    { id: "ch-th-wh-5", category: "ch-th-wh", text: "The wheel turns while we ride.", targets: ["wheel", "while"], emoji: "🛞🚲" },
+    { id: "ch-th-wh-6", category: "ch-th-wh", text: "The whale swims in the sea.", targets: ["whale"], emoji: "🐋🌊" },
     { id: "ck-1", category: "ck", text: "The sack is full of toys.", targets: ["sack"], emoji: "🧸🪀" },
     { id: "ck-2", category: "ck", text: "The deck is wet.", targets: ["deck"], emoji: "🛳️💧" },
     { id: "ck-3", category: "ck", text: "Rick went to pick a ball.", targets: ["Rick", "pick"], emoji: "🧒🏀" },
@@ -441,8 +543,9 @@
 
   const topics = [
     { id: "vowels", label: "🌈 Long vowel sounds", readLabel: "🌈 Long vowels", description: "Two letters can team up to make one long vowel sound." },
-    { id: "digraphs", label: "🧩 Vowel digraphs", readLabel: "🧩 Vowel digraphs", description: "Explore short and long oo, then practise the oi, oy, and ou letter teams." },
+    { id: "digraphs", label: "🧩 Vowel digraphs", readLabel: "🧩 Vowel digraphs", description: "Explore short and long oo, then practise oi, oy, ou, and ow as in cow." },
     { id: "sh-ph", label: "🐚 SH & PH digraphs", readLabel: "🐚 SH & PH", description: "Practise sh at the beginning and end of words, then learn how ph makes the /f/ sound." },
+    { id: "ch-th-wh", label: "🐣 CH, TH & WH digraphs", readLabel: "🐣 CH, TH & WH", description: "Read ch at the beginning and end of words, then try th as in thin and wh as in wheel." },
     { id: "ck", label: "🚀 CK word families", readLabel: "🚀 CK families", description: "Read words that end with the strong /k/ sound." }
   ];
 

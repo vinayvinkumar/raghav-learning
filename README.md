@@ -13,9 +13,13 @@ folder are consolidated here. One **English Lessons** tab contains a single
 **Ending Word Families**. The journey turns the reference pages in `english/`
 into interactive long-vowel, `ck` word-family, sentence, audio, practice,
 A-or-An, mixed-up revision, and quiz activities. It also covers short and long
-`oo`, `oi`, `oy`, and `ou` vowel digraphs plus beginning `sh`, ending `sh`, and
-`ph` consonant digraphs from the latest reference pages. Progress is saved in
-the browser.
+`oo`, `oi`, `oy`, `ou`, and `ow` as in cow, plus beginning `sh`, ending `sh`,
+`ph`, beginning and ending `ch`, `th`, and `wh` consonant digraphs. The existing
+long-O `ow` lesson stays separate from the cow sound. The latest digraph
+worksheet adds 31 words and eight reading sentences to the same reading cards,
+audio, practice, mixed quiz, and revision activities. Pictures remain hidden
+until the learner chooses to reveal them, and existing browser progress is
+preserved.
 
 ```bash
 npm run dev
