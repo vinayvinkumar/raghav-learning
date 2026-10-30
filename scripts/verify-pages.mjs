@@ -67,5 +67,25 @@ if ((manifest.icons ?? []).length < 2) {
 }
 
 await verifyPngDimensions("icons/apple-touch-icon.png", 180, 180);
+await verifyPngDimensions("apple-touch-icon.png", 180, 180);
+await verifyPngDimensions("apple-touch-icon-precomposed.png", 180, 180);
+await verifyPngDimensions("favicon.png", 32, 32);
+const appleIcon = await readFile(resolve(outputDirectory, "icons/apple-touch-icon.png"));
+for (const filename of ["apple-touch-icon.png", "apple-touch-icon-precomposed.png"]) {
+  if (!(await readFile(resolve(outputDirectory, filename))).equals(appleIcon)) {
+    throw new Error(`The conventional Apple icon has a different identity: ${filename}`);
+  }
+}
+const installHtml = await readFile(resolve(outputDirectory, "install.html"), "utf8");
+if (!installHtml.includes('href="./manifest.webmanifest"') || !installHtml.includes('href="./icons/apple-touch-icon.png"') || !installHtml.includes('href="./">Open Raghav Learning')) {
+  throw new Error("The installation page must advertise the existing icons and launch the Learning app at its own project path.");
+}
+if (/<script|<iframe|<form|\/api\//i.test(installHtml)) {
+  throw new Error("The installation page must remain script-free without private data requests.");
+}
+for (const reference of [...installHtml.matchAll(/(?:href|src)=["']([^"']+)["']/g)].map(match => match[1])) {
+  if (!reference.startsWith("./")) throw new Error(`Installation asset must be project-relative: ${reference}`);
+  await access(resolve(outputDirectory, reference));
+}
 
 console.log("Verified Learning Hub GitHub Pages output.");

@@ -6,6 +6,10 @@ const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDirectory = join(appRoot, "dist");
 const publishedFiles = [
   "index.html",
+  "install.html",
+  "favicon.png",
+  "apple-touch-icon.png",
+  "apple-touch-icon-precomposed.png",
   "english-module.css",
   "english-module.js",
   "manifest.webmanifest",
